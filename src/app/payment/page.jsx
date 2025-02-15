@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const loadScript = (src) => {
   return new Promise((resolve, reject) => {
@@ -14,20 +15,27 @@ const loadScript = (src) => {
 }
 
 const Payment = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { amount, name, sheetID, serialNumber } = location.state || {}
-  const isPaymentInitialized = useRef(false)
+  const navigate = useRouter()
+  const { paymentDetails } = useSelector((state) => state.payment)
+  const amount = paymentDetails?.amount
+  const name = paymentDetails?.name
+  const sheetID = paymentDetails?.sheetID
+  const serialNumber = paymentDetails?.serialNumber
 
+  const isPaymentInitialized = useRef(false)
   isPaymentInitialized.current = true
 
   useEffect(() => {
-    if (!amount || !name || !sheetID || !serialNumber) {
+    if (!paymentDetails || !paymentDetails.amount || !paymentDetails.name) {
       toast.error('Missing or invalid payment details!')
-      navigate('/create-new-sheet')
+      navigate.push('/create-new-sheet')
       return
     }
 
+    loadRazorpay()
+  }, [paymentDetails, navigate])
+
+  useEffect(() => {
     const loadRazorpay = async () => {
       try {
         if (!window.Razorpay) {
@@ -88,10 +96,7 @@ const Payment = () => {
               const verifyResult = await verifyResponse.json()
               if (verifyResult.success) {
                 toast.success('Payment successfully verified!')
-                const sheetId = sheetID
-                const Name = name
-                window.history.replaceState(null, '')
-                navigate('/feedback', { state: { sheetId, Name } })
+                navigate.push('/get-your-sheet')
               } else {
                 toast.error('Payment verification failed!')
               }

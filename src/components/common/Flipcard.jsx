@@ -1,4 +1,5 @@
 'use client'
+import { ArrowRight, CrossIcon } from 'lucide-react'
 import React, { useState } from 'react'
 
 const FlipCard = ({ title, text, src }) => {
@@ -31,7 +32,7 @@ const FlipCard = ({ title, text, src }) => {
             role="button"
             className="border-4 border-orange-300 rounded-full w-16 h-16 flex justify-center items-center animate-pulse cursor-pointer"
           >
-            <i className="fi fi-rr-arrow-small-right text-4xl"></i>
+            <ArrowRight />
           </div>
         </div>
       </div>
@@ -59,7 +60,7 @@ const FlipCard = ({ title, text, src }) => {
             role="button"
             className="border-4 border-orange-300 rounded-full w-16 h-16 flex justify-center items-center cursor-pointer text-black"
           >
-            <i className="fi fi-rr-cross text-xl text-red-500"></i>
+            <CrossIcon className="text-xl text-red-500" />
           </div>
         </div>
       </div>

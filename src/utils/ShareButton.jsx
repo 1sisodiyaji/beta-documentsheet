@@ -1,4 +1,7 @@
+'use client'
+import { Copy, Facebook } from 'lucide-react'
 import { toast } from 'react-hot-toast'
+import { Icons } from '../components/common/Icons'
 
 const handleCopyText = (url) => {
   navigator.clipboard
@@ -27,15 +30,15 @@ const ShareButton = ({ url }) => {
             handleCopyText(url)
           }}
         >
-          <i className="fi fi-rr-copy-alt"></i>
+          <Copy size={18} />
         </li>
         <li
-          className="p-2 hover:bg-gray-100 cursor-pointer text-gray-800"
+          className="p-2 hover:bg-gray-100 cursor-pointer text-gray-800 w-8"
           onClick={() => {
             handleShareWhatsApp(url)
           }}
         >
-          <i className="fi fi-brands-whatsapp"></i>
+          <Icons.Whatsapp className="w-full h-full" />
         </li>
         <li
           className="p-2 hover:bg-gray-100 cursor-pointer text-gray-800"
@@ -43,7 +46,7 @@ const ShareButton = ({ url }) => {
             handleShareFacebook(url)
           }}
         >
-          <i className="fi fi-brands-facebook"></i>
+          <Facebook />
         </li>
       </ul>
     </div>

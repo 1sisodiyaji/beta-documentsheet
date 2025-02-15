@@ -1,17 +1,22 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('@lottiefiles/react-lottie-player'), {
+  ssr: false,
+})
 import CreateSheet from '../../data/CreateSheet.json'
-import { Player } from '@lottiefiles/react-lottie-player'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import StatesData from '../../data/AddressData.json'
 import Banner from '../../components/common/Banner'
 import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { setPaymentDetails } from '../../store/slices/paymentSlice'
 
 const CreateNewSheet = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useRouter()
-
+  const dispatch = useDispatch()
   const [docData, setDocData] = useState({
     UserName: '',
     Reason: '',
@@ -55,7 +60,7 @@ const CreateNewSheet = () => {
     setDocData({
       ...docData,
       [name]: value,
-      ...(name === 'state' && { District: '' }), // Reset District if state changes
+      ...(name === 'state' && { District: '' }),
     })
   }
 
@@ -98,9 +103,8 @@ const CreateNewSheet = () => {
       const serialNumber = response.data.data.serialNumbers.map(
         (item) => item.serialNumber
       )
-      navigate.push('/payment', {
-        state: { amount, name, sheetID, serialNumber },
-      })
+      dispatch(setPaymentDetails({ sheetID, amount, name, serialNumber }))
+      navigate.push('/payment')
     } catch (error) {
       console.error(
         'Error creating sheet:',
@@ -111,6 +115,12 @@ const CreateNewSheet = () => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return
+    }
+  }, [])
 
   return (
     <>

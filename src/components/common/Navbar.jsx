@@ -1,10 +1,11 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-
+import { usePathname } from 'next/navigation'
 const Navbar = () => {
   const [scrollWidth, setScrollWidth] = useState(0)
-  const pathname = window.location.pathname
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -62,8 +63,8 @@ const Navbar = () => {
               href="/"
               className="flex items-center space-x-3 rtl:space-x-reverse"
             >
-              <img
-                src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732386338/WhatsApp_Image_2024-11-21_at_14.55.25_edab2be6_gtoaak-removebg-preview_dnynlk.png"
+              <Image
+                src="/logo.png"
                 width={40}
                 height={40}
                 loading="lazy"
@@ -79,10 +80,10 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`py-2 px-3 rounded-md ${
+                  className={`py-2 px-3 ${
                     pathname === link.href
-                      ? 'bg-green-300 text-black shadow-md'
-                      : 'text-black hover:bg-green-200'
+                      ? 'border-b   border-green-500 text-black'
+                      : 'text-black hover:border-green-400'
                   }`}
                 >
                   {link.label}

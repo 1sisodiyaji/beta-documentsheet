@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { motion } from 'framer-motion'
+import { BoxIcon } from 'lucide-react'
 
 const Header = () => (
   <motion.header
@@ -27,7 +28,7 @@ const ProductDetails = () => (
     transition={{ duration: 0.8 }}
   >
     <div className="flex justify-center items-center">
-      <i className="fi fi-tr-box-circle-check text-9xl overflow-hidden text-green-500"></i>
+      <BoxIcon className="w-48 overflow-hidden text-green-500" />
     </div>
     <div>
       <h2 className="text-2xl font-bold">Product Details</h2>

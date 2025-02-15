@@ -1,6 +1,9 @@
 'use client'
 import { useState } from 'react'
-import { Player } from '@lottiefiles/react-lottie-player'
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('@lottiefiles/react-lottie-player'), {
+  ssr: false,
+})
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import QRCODEANIMATION from '../../data/QR_Code_Animation.json'
@@ -11,8 +14,8 @@ const ScanTabs = () => {
   const [serialNumber, setSerialNumber] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [sheetDetails, setSheetDetails] = useState(null) // State for fetched data
-  const [activeTab, setActiveTab] = useState('scanner') // Default tab
+  const [sheetDetails, setSheetDetails] = useState(null)
+  const [activeTab, setActiveTab] = useState('scanner')
 
   const handleSubmit = async (e) => {
     e.preventDefault()

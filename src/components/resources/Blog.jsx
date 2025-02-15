@@ -1,10 +1,12 @@
 'use client'
 import Blogs from '../../data/Blogs'
 import TruncateText from '../../utils/TruncateText'
-import ShareButton from '../../utils/ShareButton'
 import TimeCalculator from '../../utils/TimeCalculator'
 import Link from 'next/link'
-
+import dynamic from 'next/dynamic'
+const ShareButton = dynamic(() => import('../../utils/ShareButton'), {
+  ssr: false,
+})
 const Blog = () => {
   const largeIndex = [3, 6, 10, 13]
 
@@ -36,7 +38,7 @@ const Blog = () => {
                     {/* Use a timestamp here */}
                   </div>
                   <ShareButton
-                    url={`${window.location.origin}/resources/${blog.slug}`}
+                    url={`https://documentsheet.com/resources/${blog.slug}`}
                   />
                 </div>
                 <Link href={`/resources/${blog.slug}`}>

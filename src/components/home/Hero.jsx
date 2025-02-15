@@ -1,5 +1,7 @@
+import { ScanBarcode } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import TextAnimation from '../common/TextAnimation'
 
 const Hero = () => {
   return (
@@ -12,7 +14,9 @@ const Hero = () => {
                 className="max-w-3xl mb-3 text-4xl font-semibold  md:text-5xl p-1 py-2"
                 style={{ lineHeight: '68px' }}
               >
-                Trusted Documents For Your Real Estate{' '}
+                <TextAnimation
+                  content={'Trusted Documents For Your Real Estate'}
+                />
                 <span className="bg-orange-400 px-4 py-1 ms-2 rounded-3xl p-1">
                   needs
                 </span>
@@ -46,7 +50,7 @@ const Hero = () => {
                 href="/scan-qr"
                 className="inline-flex items-center justify-center px-12  py-3 md:text-base text-xs font-medium text-center text-black border border-green-400 rounded-lg hover:bg-green-100"
               >
-                <i className="fi fi-rs-qr-scan pe-2"></i> Scan QR
+                <ScanBarcode className="pe-2" /> Scan QR
               </Link>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { MailCheckIcon, PhoneCallIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -8,7 +9,7 @@ const TabComponent = () => {
         href="tel:6371790702"
         className="w-96 md:h-96  h-auto p-2 flex flex-col justify-center items-center bg-white  border-dashed border-orange-200 border-4 rounded-lg shadow hover:bg-orange-100 hover:scale-95"
       >
-        <i className="fi fi-rr-circle-phone  text-3xl"></i>
+        <PhoneCallIcon className="text-3xl" />
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
           Call us Now
         </h5>
@@ -30,7 +31,7 @@ const TabComponent = () => {
         href="mailto:637golusingh@gmail.com"
         className="w-96 md:h-96 p-2  h-auto  flex flex-col justify-center items-center bg-white  border-dashed border-orange-200 border-4 rounded-lg shadow hover:bg-orange-100 hover:scale-95"
       >
-        <i className="fi fi-rr-envelope text-3xl"></i>
+        <MailCheckIcon className="text-3xl" />
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
           Drop an Email
         </h5>

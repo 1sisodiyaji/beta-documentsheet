@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
+import { Icons } from '../common/Icons'
 const Empowering = () => {
   return (
     <>
-      <div className="my-24 p-1">
-        <section className="flex md:flex-row flex-col justify-around items-center md:w-[80vw] mx-auto">
+      <div className="my-24 p-1 max-w-7xl mx-auto">
+        <section className="flex md:flex-row flex-col justify-around items-center ">
           <article className="space-y-6 md:w-1/2">
             <h1 className="md:text-3xl text-xl font-semibold py-1">
               Empowering Your Transactions, Simplifying Processes
@@ -34,15 +35,23 @@ const Empowering = () => {
             </Link>
           </article>
 
-          <div className="md:w-1/2 md:mt-0 mt-6 p-1">
-            <img
-              src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732279174/Images_1_vmzhht.png"
-              width={1000}
-              height={1000}
-              loading="lazy"
-              className="p-1"
-              alt="empowering section"
-            />
+          <div className="md:w-1/2 md:mt-0 mt-6 relative p-1">
+            <div className="absolute left-40 top-0 w-32 h-32 p-3 drop-shadow-lg rounded-md border border-orange-500">
+              {' '}
+              <Icons.Owners className=" w-full h-full " />{' '}
+            </div>
+            <div className="absolute right-40 top-0 w-32 h-32 p-3 z-2 drop-shadow-lg rounded-md border border-green-500">
+              {' '}
+              <Icons.Legal className=" w-full h-full " />{' '}
+            </div>
+            <div className="absolute left-10 bottom-0 w-32 h-32 p-3 z-2 rounded-md bg-green-100 drop-shadow-lg hover:scale-110 border border-green-300">
+              {' '}
+              <Icons.HomeDocument className=" w-full h-full " />{' '}
+            </div>
+            <div className="absolute right-10 bottom-0 w-32 h-32 p-3 drop-shadow-lg hover:scale-110 rounded-md border bg-orange-200 border-orange-300">
+              {' '}
+              <Icons.Citizen className=" w-full h-full " />{' '}
+            </div>
           </div>
         </section>
 

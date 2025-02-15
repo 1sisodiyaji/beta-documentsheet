@@ -8,17 +8,24 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "echo no-test"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.6.0",
+    "@reduxjs/toolkit": "^2.5.1",
     "@yudiel/react-qr-scanner": "^2.2.1",
     "axios": "^1.7.9",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^12.4.2",
+    "lucide-react": "^0.475.0",
     "next": "15.1.7",
     "react": "^19.0.0",
+    "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0",
-    "react-hot-toast": "^2.5.1"
+    "react-hot-toast": "^2.5.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

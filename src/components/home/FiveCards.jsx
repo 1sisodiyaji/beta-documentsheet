@@ -2,6 +2,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { PlusIcon } from 'lucide-react'
 
 const FiveCards = () => {
   // Animation variants for fade-left and fade-right effects
@@ -144,7 +145,7 @@ const FiveCards = () => {
               href={'/create-new-sheet'}
               className="text-center flex flex-col justify-center items-center"
             >
-              <i className="fi fi-rr-add text-2xl text-white"></i>
+              <PlusIcon className="text-2xl text-white" />
               <h1 className="text-white">Create Your Sheet</h1>
             </Link>
           </motion.div>
