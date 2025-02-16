@@ -5,7 +5,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Toaster />
+        <Toaster position='bottom-right' />
         <Routess />
       </BrowserRouter>
     </>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import QRCODEANIMATION from '../../data/QR_Code_Animation.json';
 import AuthAnimation from '../../data/Auth_Animation.json';
