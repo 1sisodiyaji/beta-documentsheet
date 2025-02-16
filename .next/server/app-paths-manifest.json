@@ -1,0 +1,16 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/about/page": "app/about/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/contact-us/page": "app/contact-us/page.js",
+  "/create-new-sheet/page": "app/create-new-sheet/page.js",
+  "/get-your-sheet/page": "app/get-your-sheet/page.js",
+  "/page": "app/page.js",
+  "/payment/page": "app/payment/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/privacy-policy/page": "app/privacy-policy/page.js",
+  "/resources/[slug]/page": "app/resources/[slug]/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/terms-condition/page": "app/terms-condition/page.js",
+  "/scan-qr/page": "app/scan-qr/page.js"
+}

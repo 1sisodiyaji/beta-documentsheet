@@ -1,0 +1,22 @@
+{
+  "app/create-new-sheet/page.jsx -> @lottiefiles/react-lottie-player": {
+    "id": 932,
+    "files": [
+      "static/chunks/8627a13e.5964da43c1188152.js"
+    ]
+  },
+  "components/resources/Blog.jsx -> ../../utils/ShareButton": {
+    "id": 3379,
+    "files": [
+      "static/chunks/37-cd472d10283d67b8.js",
+      "static/chunks/379-5dcac56ad20203b5.js",
+      "static/chunks/862.5db6fc18d12e06a7.js"
+    ]
+  },
+  "components/scan-qr/ScanTab.jsx -> @lottiefiles/react-lottie-player": {
+    "id": 932,
+    "files": [
+      "static/chunks/8627a13e.5964da43c1188152.js"
+    ]
+  }
+}
