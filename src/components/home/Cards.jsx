@@ -1,13 +1,11 @@
-'use client'
-import React from 'react'
-import FlipCard from '../common/Flipcard'
-import { motion } from 'framer-motion'
+import FlipCard from '../common/Flipcard';
+import { motion } from 'framer-motion';
 
 const animationVariants = {
   hiddenLeft: { opacity: 0, x: -100 },
   hiddenRight: { opacity: 0, x: 100 },
   visible: { opacity: 1, x: 0 },
-}
+};
 
 const Cards = () => {
   return (
@@ -94,7 +92,7 @@ const Cards = () => {
         </section>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Cards
+export default Cards;

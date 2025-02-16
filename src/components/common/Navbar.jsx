@@ -1,13 +1,11 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 const Navbar = () => {
-  const [scrollWidth, setScrollWidth] = useState(0)
-  const pathname = usePathname()
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrollWidth, setScrollWidth] = useState(0);
+  const pathname = window.location.pathname;
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { href: '/scan-qr', label: 'Scan QR' },
@@ -15,56 +13,50 @@ const Navbar = () => {
     { href: '/resources', label: 'Resources' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/contact-us', label: 'Contact Us' },
-  ]
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight
-      const scrollPercentage = (scrollTop / docHeight) * 100
-      setScrollWidth(scrollPercentage)
-    }
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = (scrollTop / docHeight) * 100;
+      setScrollWidth(scrollPercentage);
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
+      setIsScrolled(window.scrollY > 0);
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
-    setIsMenuOpen(false)
-  }, [pathname])
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
       <header>
         <nav
           className={`fixed w-full z-20 top-0 start-0 ${
-            isScrolled
-              ? 'bg-white shadow-md text-black duration-300'
-              : 'bg-transparent text-black'
+            isScrolled ? 'bg-white shadow-md text-black duration-300' : 'bg-transparent text-black'
           }`}
         >
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <Link
-              href="/"
-              className="flex items-center space-x-3 rtl:space-x-reverse"
-            >
-              <Image
-                src="/logo.png"
+            <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+              <img
+                src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732386338/WhatsApp_Image_2024-11-21_at_14.55.25_edab2be6_gtoaak-removebg-preview_dnynlk.png"
                 width={40}
                 height={40}
                 loading="lazy"
@@ -79,11 +71,11 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
-                  className={`py-2 px-3 ${
+                  to={link.href}
+                  className={`py-2 px-3 rounded-md ${
                     pathname === link.href
-                      ? 'border-b   border-green-500 text-black'
-                      : 'text-black hover:border-green-400'
+                      ? 'bg-green-300 text-black shadow-md'
+                      : 'text-black hover:bg-green-200'
                   }`}
                 >
                   {link.label}
@@ -93,7 +85,7 @@ const Navbar = () => {
 
             {/* Right Section */}
             <div className="flex md:order-2 space-x-3 rtl:space-x-reverse">
-              <Link href="/create-new-sheet">
+              <Link to="/create-new-sheet">
                 <button
                   type="button"
                   className="text-white bg-[#219B9D] hover:bg-[#1A776F] font-regular rounded-2xl text-sm px-4 py-2 text-center"
@@ -155,11 +147,7 @@ const Navbar = () => {
                 strokeWidth={2}
                 stroke="currentColor"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
@@ -168,7 +156,7 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className={`block py-2 px-3 rounded-md ${
                       pathname === link.href
                         ? 'bg-green-300 text-black shadow-md'
@@ -180,7 +168,7 @@ const Navbar = () => {
                 </li>
               ))}
               <Link
-                href={'/privacy-policy'}
+                to={'/privacy-policy'}
                 className={`block py-2 px-3 rounded-md ${
                   pathname === '/privacy-policy'
                     ? 'bg-green-300 text-black shadow-md'
@@ -190,7 +178,7 @@ const Navbar = () => {
                 Privacy Policy
               </Link>
               <Link
-                href={'/terms-condition'}
+                to={'/terms-condition'}
                 className={`block py-2 px-3 rounded-md ${
                   pathname === '/terms-condition'
                     ? 'bg-green-300 text-black shadow-md'
@@ -212,7 +200,7 @@ const Navbar = () => {
         )}
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

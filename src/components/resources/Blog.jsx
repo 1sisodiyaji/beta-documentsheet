@@ -1,19 +1,16 @@
-'use client'
-import Blogs from '../../data/Blogs'
-import TruncateText from '../../utils/TruncateText'
-import TimeCalculator from '../../utils/TimeCalculator'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-const ShareButton = dynamic(() => import('../../utils/ShareButton'), {
-  ssr: false,
-})
+import { Link } from 'react-router-dom';
+import Blogs from '../../data/Blogs';
+import TruncateText from '../../utils/TruncateText';
+import ShareButton from '../../utils/ShareButton';
+import TimeCalculator from '../../utils/TimeCalculator';
+
 const Blog = () => {
-  const largeIndex = [3, 6, 10, 13]
+  const largeIndex = [3, 6, 10, 13];
 
   return (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-10 max-w-7xl mx-auto my-16 p-2 md:p-8">
       {Blogs.map((blog, index) => {
-        const shouldSpan = largeIndex.includes(index)
+        const shouldSpan = largeIndex.includes(index);
 
         return (
           <div
@@ -34,14 +31,11 @@ const Blog = () => {
               <div className="p-4">
                 <div className="flex justify-between">
                   <div className="text-sm text-gray-600">
-                    <TimeCalculator text={blog.createdOn} />{' '}
-                    {/* Use a timestamp here */}
+                    <TimeCalculator text={blog.createdOn} /> {/* Use a timestamp here */}
                   </div>
-                  <ShareButton
-                    url={`https://documentsheet.com/resources/${blog.slug}`}
-                  />
+                  <ShareButton url={`${window.location.origin}/resources/${blog.slug}`} />
                 </div>
-                <Link href={`/resources/${blog.slug}`}>
+                <Link to={`/resources/${blog.slug}`}>
                   <h5 className="mt-2 md:text-lg text-md font-semibold text-gray-900 hover:text-green-600 transition-colors">
                     {blog.title}
                   </h5>
@@ -52,10 +46,10 @@ const Blog = () => {
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Blog
+export default Blog;

@@ -1,6 +1,5 @@
-'use client'
-import { useState } from 'react'
-import { Scanner } from '@yudiel/react-qr-scanner'
+import { useState } from 'react';
+import { Scanner } from '@yudiel/react-qr-scanner';
 
 const ScanResultModal = ({ qrResult, closeModal }) => {
   return (
@@ -19,40 +18,40 @@ const ScanResultModal = ({ qrResult, closeModal }) => {
         <iframe src={qrResult} frameBorder="0" className="w-full h-96"></iframe>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const QrCodeScanner = () => {
-  const [qrResult, setQrResult] = useState(null)
-  const [isScanning, setIsScanning] = useState(false)
-  const [showModal, setShowModal] = useState(false)
+  const [qrResult, setQrResult] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const startScanner = () => {
-    setIsScanning(true)
-  }
+    setIsScanning(true);
+  };
 
   const stopScanner = () => {
-    setIsScanning(false)
-    setQrResult(null) // Optionally clear the result when stopping the scanner
-  }
+    setIsScanning(false);
+    setQrResult(null); // Optionally clear the result when stopping the scanner
+  };
 
   const handleScan = (result) => {
     if (result) {
-      setQrResult(result[0].rawValue)
-      setIsScanning(false)
-      setShowModal(true)
+      setQrResult(result[0].rawValue);
+      setIsScanning(false);
+      setShowModal(true);
     }
-  }
+  };
 
   const handleError = (err) => {
-    setIsScanning(false)
-    console.error('Scanning error:', err)
-  }
+    setIsScanning(false);
+    console.error('Scanning error:', err);
+  };
 
   const closeModal = () => {
-    setShowModal(false)
-    setQrResult(null)
-  }
+    setShowModal(false);
+    setQrResult(null);
+  };
 
   return (
     <div className="flex flex-col items-center space-y-6 p-4">
@@ -107,17 +106,13 @@ const QrCodeScanner = () => {
             </button>
           </div>
         ) : (
-          <p className="text-gray-500">
-            No result yet. Please scan a QR code or barcode!
-          </p>
+          <p className="text-gray-500">No result yet. Please scan a QR code or barcode!</p>
         )}
 
-        {showModal && (
-          <ScanResultModal qrResult={qrResult} closeModal={closeModal} />
-        )}
+        {showModal && <ScanResultModal qrResult={qrResult} closeModal={closeModal} />}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QrCodeScanner
+export default QrCodeScanner;

@@ -1,11 +1,10 @@
-'use client'
-import Link from 'next/link'
-import { useState } from 'react'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Testimonials = ({ text, name, location }) => {
   return (
     <Link
-      href="#"
+      to="#"
       className="md:max-w-sm flex-shrink-0 w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-orange-50"
     >
       <figure className="max-w-screen-md">
@@ -23,9 +22,7 @@ const Testimonials = ({ text, name, location }) => {
           ))}
         </div>
         <blockquote>
-          <p className="md:text-xl text-xs font-regular text-gray-900 text-center">
-            {text}
-          </p>
+          <p className="md:text-xl text-xs font-regular text-gray-900 text-center">{text}</p>
         </blockquote>
         <figcaption className="flex items-center justify-center mt-6 space-x-3">
           <div className="flex items-center divide-x-2 divide-gray-300">
@@ -35,8 +32,8 @@ const Testimonials = ({ text, name, location }) => {
         </figcaption>
       </figure>
     </Link>
-  )
-}
+  );
+};
 
 const Testimonial = () => {
   const testimonials = [
@@ -80,25 +77,25 @@ const Testimonial = () => {
       name: 'Nandini Rao',
       location: 'Hassan',
     },
-  ]
+  ];
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const itemsPerPage = 3
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsPerPage = 3;
 
   const nextSlide = () => {
     if (currentIndex < testimonials.length - itemsPerPage) {
-      setCurrentIndex(currentIndex + 1)
+      setCurrentIndex(currentIndex + 1);
     }
-  }
+  };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
+      setCurrentIndex(currentIndex - 1);
     }
-  }
+  };
 
-  const isPrevDisabled = currentIndex === 0
-  const isNextDisabled = currentIndex >= testimonials.length - itemsPerPage
+  const isPrevDisabled = currentIndex === 0;
+  const isNextDisabled = currentIndex >= testimonials.length - itemsPerPage;
 
   return (
     <section className="my-12 p-1">
@@ -150,7 +147,7 @@ const Testimonial = () => {
         </div>
       </section>
     </section>
-  )
-}
+  );
+};
 
-export default Testimonial
+export default Testimonial;

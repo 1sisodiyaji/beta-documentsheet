@@ -669,14 +669,7 @@
   {
     "state": "Sikkim",
     "count": 6,
-    "districts": [
-      "Gangtok",
-      "Gyalshing",
-      "Mangan",
-      "Namchi",
-      "Pakyong",
-      "Soreng"
-    ]
+    "districts": ["Gangtok", "Gyalshing", "Mangan", "Namchi", "Pakyong", "Soreng"]
   },
   {
     "state": "Tamil Nadu",

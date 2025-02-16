@@ -1,13 +1,11 @@
-'use client'
-import { ArrowRight, CrossIcon } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const FlipCard = ({ title, text, src }) => {
-  const [isFlipped, setIsFlipped] = useState(false)
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const handleCardFlip = () => {
-    setIsFlipped((prev) => !prev)
-  }
+    setIsFlipped((prev) => !prev);
+  };
 
   return (
     <div
@@ -32,7 +30,7 @@ const FlipCard = ({ title, text, src }) => {
             role="button"
             className="border-4 border-orange-300 rounded-full w-16 h-16 flex justify-center items-center animate-pulse cursor-pointer"
           >
-            <ArrowRight />
+            <i className="fi fi-rr-arrow-small-right text-4xl"></i>
           </div>
         </div>
       </div>
@@ -60,12 +58,12 @@ const FlipCard = ({ title, text, src }) => {
             role="button"
             className="border-4 border-orange-300 rounded-full w-16 h-16 flex justify-center items-center cursor-pointer text-black"
           >
-            <CrossIcon className="text-xl text-red-500" />
+            <i className="fi fi-rr-cross text-xl text-red-500"></i>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FlipCard
+export default FlipCard;

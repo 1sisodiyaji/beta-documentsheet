@@ -1,29 +1,25 @@
-'use client'
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 const AboutTabs = () => {
-  const [activeTab, setActiveTab] = useState('Vision')
+  const [activeTab, setActiveTab] = useState('Vision');
 
   const tabsContent = {
     Vision: {
       title: 'Simplifying Documentation for Everyone',
       text: 'Our vision is to create a world where documentation processes are effortless, eliminating the need for waiting in long lines or dealing with cumbersome paperwork. We aim to empower individuals and businesses with accessible, user-friendly solutions.',
-      image:
-        'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550942/3_i27vzr.png',
+      image: 'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550942/3_i27vzr.png',
     },
     Mission: {
       title: 'Secure and Accessible Documentation Online',
       text: 'Our mission is to provide safe, secure, and efficient online document services. We prioritize data integrity and accessibility, ensuring that all documents are easy to access, store, and share without compromising safety.',
-      image:
-        'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550953/1a_3_kxpb9k.png',
+      image: 'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550953/1a_3_kxpb9k.png',
     },
     Approach: {
       title: 'Reimagining the Future of Documentation',
       text: 'Our approach is centered around innovation. We’re redefining how documents are created, managed, and presented by incorporating cutting-edge technology to offer seamless solutions for businesses and individuals alike.',
-      image:
-        'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/8_wjsz9r.png',
+      image: 'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/8_wjsz9r.png',
     },
-  }
+  };
   return (
     <>
       <section className=" md:my-36 p-1">
@@ -43,9 +39,7 @@ const AboutTabs = () => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`md:px-6 px-3 py-2 rounded-full font-semibold md:text-sm text-xs transition-colors ${
-                  activeTab === tab
-                    ? 'bg-orange-500 text-white'
-                    : 'bg-orange-100 text-orange-500'
+                  activeTab === tab ? 'bg-orange-500 text-white' : 'bg-orange-100 text-orange-500'
                 }`}
               >
                 Our {tab}
@@ -80,7 +74,7 @@ const AboutTabs = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default AboutTabs
+export default AboutTabs;

@@ -1,6 +1,5 @@
-'use client'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const CardGrid = () => {
   return (
@@ -17,11 +16,11 @@ const CardGrid = () => {
             Manage Your Documents Seamlessly
           </h5>
           <p className="font-normal text-white md:text-md text-xs">
-            Quickly access, organize, and share your document sheets with an
-            intuitive and secure interface.
+            Quickly access, organize, and share your document sheets with an intuitive and secure
+            interface.
           </p>
           <Link
-            href={'/create-new-sheet'}
+            to={'/create-new-sheet'}
             className="md:my-4 my-1 md:px-8 px-3 md:py-2 py-1 md:text-lg text-xs border border-dashed border-green-200 rounded-lg text-orange-100 shadow-md bg-orange-500 hover:bg-orange-400"
           >
             Create New Sheet
@@ -59,11 +58,11 @@ const CardGrid = () => {
             Track, Update, and Collaborate
           </h5>
           <p className="font-normal text-white md:text-base text-xs text-center">
-            Stay on top of your document sheets with real-time updates and
-            collaborative tools for teams.
+            Stay on top of your document sheets with real-time updates and collaborative tools for
+            teams.
           </p>
           <Link
-            href={'/pricing'}
+            to={'/pricing'}
             className="md:my-4 my-1 md:px-8 px-3 md:py-2 py-1 md:text-lg text-xs border border-dashed border-green-200 rounded-lg text-white shadow-md bg-green-500 hover:bg-green-400"
           >
             See our pricing
@@ -71,7 +70,7 @@ const CardGrid = () => {
         </div>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default CardGrid
+export default CardGrid;

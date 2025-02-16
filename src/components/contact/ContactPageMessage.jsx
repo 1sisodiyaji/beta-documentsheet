@@ -1,6 +1,5 @@
-'use client'
-import { useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ContactPageMessage = () => {
   const [formData, setFormData] = useState({
@@ -8,70 +7,67 @@ const ContactPageMessage = () => {
     email: '',
     mobile: '',
     message: '',
-  })
-  const [isLoading, setIsLoading] = useState(false)
+  });
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const validateForm = () => {
-    const { name, email, mobile, message } = formData
+    const { name, email, mobile, message } = formData;
 
     if (!name.trim()) {
-      toast.error('Name is required!')
-      return false
+      toast.error('Name is required!');
+      return false;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim() || !emailRegex.test(email)) {
-      toast.error('Valid email is required!')
-      return false
+      toast.error('Valid email is required!');
+      return false;
     }
 
     if (!mobile.trim() || !/^\d{10}$/.test(mobile)) {
-      toast.error('Valid 10-digit mobile number is required!')
-      return false
+      toast.error('Valid 10-digit mobile number is required!');
+      return false;
     }
 
     if (!message.trim()) {
-      toast.error('Message cannot be empty!')
-      return false
+      toast.error('Message cannot be empty!');
+      return false;
     }
 
-    return true
-  }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validateForm()) return
+    if (!validateForm()) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/feedback`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        }
-      )
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
-        toast.success('Feedback submitted successfully!')
-        setFormData({ name: '', email: '', mobile: '', message: '' })
+        toast.success('Feedback submitted successfully!');
+        setFormData({ name: '', email: '', mobile: '', message: '' });
       } else {
-        toast.error('Failed to submit feedback. Try again.')
+        toast.error('Failed to submit feedback. Try again.');
       }
     } catch (error) {
-      console.error('Error submitting feedback:', error)
-      toast.error('An unexpected error occurred.')
+      console.error('Error submitting feedback:', error);
+      toast.error('An unexpected error occurred.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -142,7 +138,7 @@ const ContactPageMessage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ContactPageMessage
+export default ContactPageMessage;

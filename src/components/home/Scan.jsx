@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Scan = () => {
   return (
@@ -11,13 +10,12 @@ const Scan = () => {
               Instant Access with Just a Scan
             </h1>
             <p className="md:text-lg ">
-              Say goodbye to paper trails. Our integrated QR code technology
-              ensures <br /> that your documents are accessibleanytime, <br />{' '}
-              anywhere—fast, secure, and reliable.
+              Say goodbye to paper trails. Our integrated QR code technology ensures <br /> that
+              your documents are accessibleanytime, <br /> anywhere—fast, secure, and reliable.
             </p>
 
             <Link
-              href="/scan-qr"
+              to="/scan-qr"
               className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-3xl bg-[#219B9D] hover:bg-[#279193] hover:text-black group focus:ring-2 focus:ring-green-300"
             >
               Experience Instant Access
@@ -46,7 +44,7 @@ const Scan = () => {
         </section>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Scan
+export default Scan;

@@ -1,6 +1,5 @@
-'use client'
-import { motion } from 'framer-motion'
-import Accordion from '../common/Accordion'
+import { motion } from 'framer-motion';
+import Accordion from '../common/Accordion';
 
 const FAQ = () => {
   return (
@@ -67,7 +66,7 @@ const FAQ = () => {
         </motion.section>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FAQ
+export default FAQ;

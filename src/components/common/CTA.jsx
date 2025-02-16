@@ -1,18 +1,16 @@
-import Link from 'next/link'
+import { Link } from 'react-router-dom';
 
 const CTA = ({ title, text, btnText }) => {
   return (
     <>
       <section className="my-12 ">
         <div className="max-w-7xl mx-auto text-center  py-8 px-6 rounded-lg bg-gray-100">
-          <h2 className="md:text-4xl text-xl font-bold text-gray-800 mb-6 p-1">
-            {title}
-          </h2>
+          <h2 className="md:text-4xl text-xl font-bold text-gray-800 mb-6 p-1">{title}</h2>
           <p className="text-gray-600 md:text-lg text-md mb-10">{text}</p>
 
           <div className="flex justify-center items-center p-1">
             <Link
-              href="/create-new-sheet"
+              to="/create-new-sheet"
               className="inline-flex items-center justify-center md:px-5 px-3 py-3 mr-3 md:text-base text-xs font-medium text-center text-white rounded-3xl bg-[#219B9D] hover:bg-[#A7E4CD] hover:text-black group focus:ring-2 focus:ring-green-300 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
             >
               {btnText}
@@ -31,7 +29,7 @@ const CTA = ({ title, text, btnText }) => {
             </Link>
 
             <Link
-              href="/pricing"
+              to="/pricing"
               className="inline-flex items-center justify-center md:px-5 px-3 py-3 mr-3 md:text-base text-xs  font-medium text-center text-black rounded-3xl  border border-[#219B9D] hover:bg-[#A7E4CD] hover:text-black group focus:ring-2 focus:ring-green-300 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
             >
               See Our Pricing
@@ -40,7 +38,7 @@ const CTA = ({ title, text, btnText }) => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default CTA
+export default CTA;

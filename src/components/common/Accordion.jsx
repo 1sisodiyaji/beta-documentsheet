@@ -1,12 +1,11 @@
-'use client'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const Accordion = ({ heading, content }) => {
-  const [isOpen, setIsOpen] = useState(false) // State to manage accordion visibility
+  const [isOpen, setIsOpen] = useState(false); // State to manage accordion visibility
 
   const toggleAccordion = () => {
-    setIsOpen(!isOpen) // Toggle the accordion state
-  }
+    setIsOpen(!isOpen); // Toggle the accordion state
+  };
 
   return (
     <div className="accordion">
@@ -39,7 +38,7 @@ const Accordion = ({ heading, content }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Accordion
+export default Accordion;

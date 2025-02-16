@@ -1,5 +1,3 @@
-import React from 'react'
-
 const HeroAbout = () => {
   return (
     <>
@@ -39,10 +37,9 @@ const HeroAbout = () => {
               Simplifying Document Management for You
             </h2>
             <p className="text-gray-600 mt-4 md:text-base text-xs">
-              We specialize in providing high-quality, customizable document
-              sheets tailored to meet your needs. Whether you&apos;re managing
-              data, creating templates, or organizing records, our services
-              ensure a seamless experience with unparalleled reliability and
+              We specialize in providing high-quality, customizable document sheets tailored to meet
+              your needs. Whether you&apos;re managing data, creating templates, or organizing
+              records, our services ensure a seamless experience with unparalleled reliability and
               precision.
             </p>
             <div className="mt-8 space-y-6">
@@ -71,8 +68,8 @@ const HeroAbout = () => {
                     Customizable Templates
                   </h3>
                   <p className="text-gray-600 md:text-base text-xs">
-                    Create and customize templates to fit your unique business
-                    needs. From invoices to reports, we’ve got you covered.
+                    Create and customize templates to fit your unique business needs. From invoices
+                    to reports, we’ve got you covered.
                   </p>
                 </div>
               </div>
@@ -101,9 +98,8 @@ const HeroAbout = () => {
                     Seamless Integration
                   </h3>
                   <p className="text-gray-600 md:text-base text-xs">
-                    Our document sheets can be easily integrated into your
-                    existing workflows, ensuring a smooth and hassle-free
-                    experience.
+                    Our document sheets can be easily integrated into your existing workflows,
+                    ensuring a smooth and hassle-free experience.
                   </p>
                 </div>
               </div>
@@ -112,7 +108,7 @@ const HeroAbout = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default HeroAbout
+export default HeroAbout;

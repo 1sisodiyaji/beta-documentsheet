@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ScanHero = () => {
   return (
     <>
@@ -16,11 +14,7 @@ const ScanHero = () => {
                   stroke="#faa700"
                 >
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {' '}
                     <path
@@ -57,11 +51,7 @@ const ScanHero = () => {
                   stroke="#faa700"
                 >
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {' '}
                     <path
@@ -98,11 +88,7 @@ const ScanHero = () => {
                   stroke="#faa700"
                 >
                   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
                     {' '}
                     <path
@@ -136,13 +122,12 @@ const ScanHero = () => {
               Manage Your Documents with Ease
             </h2>
             <p className="text-gray-600 mt-4">
-              Leverage our smart QR code system to retrieve or upload your
-              documents quickly. Say goodbye to manual processes and hello to
-              seamless efficiency.
+              Leverage our smart QR code system to retrieve or upload your documents quickly. Say
+              goodbye to manual processes and hello to seamless efficiency.
             </p>
             <p className="text-gray-600 mt-4">
-              Whether you have a serial number or a QR code, our tools are built
-              for speed, accuracy, and security.
+              Whether you have a serial number or a QR code, our tools are built for speed,
+              accuracy, and security.
             </p>
           </div>
           {/* Right Image */}
@@ -159,7 +144,7 @@ const ScanHero = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default ScanHero
+export default ScanHero;

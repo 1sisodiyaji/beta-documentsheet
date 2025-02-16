@@ -1,52 +1,48 @@
-'use client'
-import { useState } from 'react'
-import dynamic from 'next/dynamic'
-const Player = dynamic(() => import('@lottiefiles/react-lottie-player'), {
-  ssr: false,
-})
-import { toast } from 'react-hot-toast'
-import axios from 'axios'
-import QRCODEANIMATION from '../../data/QR_Code_Animation.json'
-import AuthAnimation from '../../data/Auth_Animation.json'
-import QrCodeScanner from './QrCodeScanner'
+import { useState } from 'react';
+import { Player } from '@lottiefiles/react-lottie-player';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import QRCODEANIMATION from '../../data/QR_Code_Animation.json';
+import AuthAnimation from '../../data/Auth_Animation.json';
+import QrCodeScanner from './QrCodeScanner';
 
 const ScanTabs = () => {
-  const [serialNumber, setSerialNumber] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [sheetDetails, setSheetDetails] = useState(null)
-  const [activeTab, setActiveTab] = useState('scanner')
+  const [serialNumber, setSerialNumber] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [sheetDetails, setSheetDetails] = useState(null); // State for fetched data
+  const [activeTab, setActiveTab] = useState('scanner'); // Default tab
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!serialNumber) {
-      toast.error('Please enter a serial number!')
-      return
+      toast.error('Please enter a serial number!');
+      return;
     }
 
-    setLoading(true)
-    setError(null)
-    setSheetDetails(null) // Reset previous data before a new request
+    setLoading(true);
+    setError(null);
+    setSheetDetails(null); // Reset previous data before a new request
 
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/search-sheet/${serialNumber}`
-      )
+        `${import.meta.env.VITE_BASE_URL}/api/user/search-sheet/${serialNumber}`
+      );
 
-      const data = response.data
+      const data = response.data;
 
       // Set the fetched sheet details
-      setSheetDetails(data.SheetDetails)
-      toast.success('Data fetched successfully!')
+      setSheetDetails(data.SheetDetails);
+      toast.success('Data fetched successfully!');
     } catch (error) {
-      console.error('Error fetching data:', error)
-      setError('Failed to fetch data. Please try again.')
-      toast.error('Failed to fetch data. Please try again.')
+      console.error('Error fetching data:', error);
+      setError('Failed to fetch data. Please try again.');
+      toast.error('Failed to fetch data. Please try again.');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <section className="md:my-24 p-1">
@@ -96,12 +92,10 @@ const ScanTabs = () => {
                 />
               </div>
               <div className="flex flex-col items-center md:w-2/3">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Search by Serial Number
-                </h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-4">Search by Serial Number</h3>
                 <p className="text-gray-600 mb-8">
-                  Enter the serial number associated with your document to
-                  retrieve the relevant data.
+                  Enter the serial number associated with your document to retrieve the relevant
+                  data.
                 </p>
 
                 <form
@@ -123,17 +117,13 @@ const ScanTabs = () => {
                   </button>
                 </form>
 
-                {loading && (
-                  <p className="text-orange-500 mt-4">Searching...</p>
-                )}
+                {loading && <p className="text-orange-500 mt-4">Searching...</p>}
                 {error && <p className="text-red-500 mt-4">{error}</p>}
 
                 {/* Display the sheet details if available */}
                 {sheetDetails && (
                   <div className="mt-8 p-4 w-full max-w-md bg-white shadow rounded-lg border-2 border-orange-200">
-                    <h4 className="text-lg font-bold text-gray-700">
-                      Sheet Detail
-                    </h4>
+                    <h4 className="text-lg font-bold text-gray-700">Sheet Detail</h4>
                     <p className="text-sm text-gray-600">
                       <strong>Name :</strong> {sheetDetails.name}
                     </p>
@@ -147,8 +137,7 @@ const ScanTabs = () => {
                       <strong>Amount :</strong> ₹ {sheetDetails.amount}
                     </p>
                     <p className="text-sm text-gray-600">
-                      <strong>Date :</strong>{' '}
-                      {new Date(sheetDetails.date).toLocaleDateString()}
+                      <strong>Date :</strong> {new Date(sheetDetails.date).toLocaleDateString()}
                     </p>
                     <p className="text-sm text-gray-600 mt-4">
                       <strong>Serial Numbers :</strong>
@@ -178,7 +167,7 @@ const ScanTabs = () => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ScanTabs
+export default ScanTabs;

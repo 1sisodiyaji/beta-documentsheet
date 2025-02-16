@@ -10,7 +10,7 @@ const TimeConverter = ({ date }) => {
         hour12: true,
       })}
     </small>
-  )
-}
+  );
+};
 
-export default TimeConverter
+export default TimeConverter;

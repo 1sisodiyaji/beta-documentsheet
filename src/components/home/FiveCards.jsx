@@ -1,40 +1,19 @@
-'use client'
-import React from 'react'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { PlusIcon } from 'lucide-react'
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const FiveCards = () => {
   // Animation variants for fade-left and fade-right effects
   const fadeLeftVariants = {
     hidden: { opacity: 0, x: -100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, type: 'spring' },
-    },
-    hover: {
-      scale: 0.95,
-      rotateY: 10,
-      rotateX: 10,
-      transition: { duration: 0.3 },
-    },
-  }
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, type: 'spring' } },
+    hover: { scale: 0.95, rotateY: 10, rotateX: 10, transition: { duration: 0.3 } },
+  };
 
   const fadeRightVariants = {
     hidden: { opacity: 0, x: 100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, type: 'spring' },
-    },
-    hover: {
-      scale: 0.95,
-      rotateY: -10,
-      rotateX: 10,
-      transition: { duration: 0.3 },
-    },
-  }
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, type: 'spring' } },
+    hover: { scale: 0.95, rotateY: -10, rotateX: 10, transition: { duration: 0.3 } },
+  };
 
   return (
     <>
@@ -142,17 +121,17 @@ const FiveCards = () => {
             className="flex flex-col justify-center items-center w-96 min-h-48 bg-orange-400 rounded-md shadow-lg"
           >
             <Link
-              href={'/create-new-sheet'}
+              to={'/create-new-sheet'}
               className="text-center flex flex-col justify-center items-center"
             >
-              <PlusIcon className="text-2xl text-white" />
+              <i className="fi fi-rr-add text-2xl text-white"></i>
               <h1 className="text-white">Create Your Sheet</h1>
             </Link>
           </motion.div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FiveCards
+export default FiveCards;
