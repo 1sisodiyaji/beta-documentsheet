@@ -1,7 +1,32 @@
 import Banner from '../components/common/Banner';
+import { Helmet } from "react-helmet";
+
 const PrivacyPolicy = () => {
   return (
     <>
+
+      <Helmet>
+        <title>Privacy Policy | Document Sheet</title>
+        <meta
+          name="description"
+          content="Learn how Document Sheet collects, uses, and protects your data. Your privacy is our priority."
+        />
+        <meta
+          name="keywords"
+          content="privacy policy, data security, user privacy, document sheet, personal information"
+        />
+        <meta name="author" content="Document Sheet" />
+
+        {/* Open Graph for Social Media */}
+        <meta property="og:title" content="Privacy Policy | Document Sheet" />
+        <meta
+          property="og:description"
+          content="Learn how Document Sheet collects, uses, and protects your data. Your privacy is our priority."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.documentsheet.com/privacy-policy" />
+        <meta property="og:image" content="./logo.png" />
+      </Helmet>
       <div className="min-h-screen">
         <Banner
           title={'Your Privacy, Our Commitment'}
@@ -14,14 +39,14 @@ const PrivacyPolicy = () => {
           <p className='text-base'>At <strong>Document Sheet</strong>, we prioritize the privacy and security of our users. This Privacy Policy outlines how we collect, use, and protect your information when you interact with our platform. By using our services, you agree to the practices described below.</p>
 
           <h2 className='font-semibold text-xl my-2'>Information We Collect</h2>
-          <p  className='text-base'>We only collect essential information to provide and improve our services. This includes:</p>
+          <p className='text-base'>We only collect essential information to provide and improve our services. This includes:</p>
           <ul>
             <li className='text-base'><strong>Name:</strong> To identify the user associated with a document sheet.</li>
             <li className='text-base'><strong>Place:</strong> To record the location where the document is used.</li>
             <li className='text-base'><strong>Reason:</strong> To log the purpose of the document sheet usage.</li>
             <li className='text-base'><strong>Date:</strong> To maintain accurate usage records.</li>
           </ul>
-          <p  className='text-base mt-2'><strong>Note:</strong> We do not collect or use cookies to store any data.</p>
+          <p className='text-base mt-2'><strong>Note:</strong> We do not collect or use cookies to store any data.</p>
 
           <h2 className='font-semibold text-xl mb-2 mt-4'>How We Use Your Information</h2>
           <p className='text-base'>The collected data is used for the following purposes:</p>

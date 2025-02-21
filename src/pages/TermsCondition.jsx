@@ -1,7 +1,21 @@
 import Banner from '../components/common/Banner';
+import { Helmet } from "react-helmet";
+
 const TermsCondition = () => {
   return (
     <>
+      <Helmet>
+        <title>Terms and Conditions | Document Sheet</title>
+        <meta name="description"    content="Read our terms and conditions to understand the guidelines for using Document Sheet services."  />
+        <meta name="keywords"  content="terms and conditions, document sheet, usage policy, guidelines, legal terms" />
+        <meta name="author" content="Document Sheet" />
+        <meta property="og:title" content="Terms and Conditions | Document Sheet" />
+        <meta property="og:description"  content="Read our terms and conditions to understand the guidelines for using Document Sheet services." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.documentsheet.com/terms-conditions" />
+        <meta property="og:image" content="./logo.png" />
+      </Helmet>
+
       <div className="min-h-screen">
         <Banner
           title={'Terms and Conditions of Use'}

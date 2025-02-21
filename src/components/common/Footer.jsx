@@ -25,6 +25,11 @@ const Footer = () => {
                 Terms & Condition
               </Link>
             </li>
+            <li>
+              <Link to="/refund-policy" className="hover:underline me-4 md:me-6">
+               Refund Policy
+              </Link>
+            </li>
           </ul>
         </div>
       </footer>

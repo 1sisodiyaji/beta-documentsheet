@@ -15,6 +15,7 @@ import SuccessPage from '../pages/SuccessPage';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import NotFoundPage from '../pages/NotFoundPage';
+import RefundPolicy from '../pages/RefundPolicy';
 
 const Routess = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const Routess = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-condition" element={<TermsCondition />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/feedback" element={<SuccessPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
