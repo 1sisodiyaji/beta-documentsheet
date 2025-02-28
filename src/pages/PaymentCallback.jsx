@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion'; 
+import { useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import { CheckCircle, SplineIcon, TimerIcon } from 'lucide-react';
 
@@ -10,25 +10,20 @@ const PaymentCallback = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
+    const { name, sheetID, merchantOrderId } = location.state || {};
 
     useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const merchantTransactionId = searchParams.get('merchantTransactionId') || localStorage.getItem('currentPaymentId');
-
-        if (!merchantTransactionId) {
-            setStatus('error');
-            setError('Transaction ID not found');
-            return;
-        }
-
         const checkPaymentStatus = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/payments/status/${merchantTransactionId}`);
+                const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/verify-payment/${merchantOrderId}`);
                 const { data } = response;
 
                 if (data.success) {
                     setPaymentDetails(data);
                     setStatus(data.code === 'PAYMENT_SUCCESS' ? 'SUCCESS' : 'FAILED');
+                    if (data.code === 'PAYMENT_SUCCESS') {
+                        navigate('/feedback', { state: { name, sheetID } });
+                    }
                 } else {
                     throw new Error(data.message || 'Payment verification failed');
                 }
@@ -39,7 +34,6 @@ const PaymentCallback = () => {
             }
         };
 
-        // Check payment status immediately and then every 3 seconds until we get a final status
         const checkInterval = setInterval(async () => {
             if (status === 'SUCCESS' || status === 'FAILED') {
                 clearInterval(checkInterval);
@@ -48,10 +42,10 @@ const PaymentCallback = () => {
             await checkPaymentStatus();
         }, 3000);
 
-        checkPaymentStatus(); // Initial check
+        checkPaymentStatus();
 
         return () => clearInterval(checkInterval);
-    }, [location, status]);
+    }, [status]);
 
     const getStatusContent = () => {
         switch (status) {
@@ -90,7 +84,7 @@ const PaymentCallback = () => {
 
     return (
         <div className="min-h-screen flex justify-center items-center bg-gray-50">
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center"
@@ -98,7 +92,7 @@ const PaymentCallback = () => {
                 {content.icon}
                 <h2 className={`text-2xl font-bold mb-2 ${content.color}`}>{content.title}</h2>
                 <p className="text-gray-600 mb-6">{content.message}</p>
-                
+
                 {(status === 'SUCCESS' || status === 'FAILED' || status === 'error') && (
                     <button
                         onClick={() => navigate('/')}

@@ -7,7 +7,7 @@ import StatesData from '../data/AddressData.json';
 import Banner from '../components/common/Banner';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const CreateNewSheet = () => {
   const [loading, setLoading] = useState(false);
@@ -56,7 +56,7 @@ const CreateNewSheet = () => {
     setDocData({
       ...docData,
       [name]: value,
-      ...(name === 'state' && { District: '' }), // Reset District if state changes
+      ...(name === 'state' && { District: '' }),
     });
   };
 

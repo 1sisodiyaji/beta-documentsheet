@@ -129,7 +129,6 @@ const SuccessPage = () => {
       navigate('/');
       return;
     }
-    console.log(sheetId);
     if (hasFetched.current) return;
     hasFetched.current = true;
     DownloadSheet(sheetId);
@@ -162,9 +161,8 @@ const SuccessPage = () => {
                 {[1, 2, 3, 4, 5].map((star) => (
                   <i
                     key={star}
-                    className={`fi fi-sr-star cursor-pointer ${
-                      star <= rating ? 'text-yellow-400' : 'text-gray-300'
-                    } text-2xl`}
+                    className={`fi fi-sr-star cursor-pointer ${star <= rating ? 'text-yellow-400' : 'text-gray-300'
+                      } text-2xl`}
                     onClick={() => handleRatingClick(star)} // Set rating on click
                   ></i>
                 ))}
@@ -188,9 +186,8 @@ const SuccessPage = () => {
               {/* Submit Button */}
               <div className="flex justify-end">
                 <button
-                  className={`px-6 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition ${
-                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
+                  className={`px-6 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
                   onClick={handleSubmit}
                   disabled={isSubmitting} // Disable while submitting
                 >

@@ -8,7 +8,6 @@ const Payment = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { amount, name, sheetID, serialNumber } = location.state || {};
-  const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const Payment = () => {
   }, [amount, name, sheetID, serialNumber, navigate]);
 
   const handlePaymentInitiation = async () => {
-    setIsLoading(true);
     setShowConfirmation(false);
 
     try {
@@ -34,21 +32,18 @@ const Payment = () => {
           serialNumber,
           redirectUrl: `${window.location.origin}/payment-callback`
         })
-      }); 
+      });
       const data = await response.json();
-      console.log(data);
       const { paymentUrl, merchantOrderId } = data;
-      console.log(paymentUrl, merchantOrderId);
-      if (paymentUrl) { 
-        localStorage.setItem('currentPaymentId', merchantOrderId);
-        window.location.href = paymentUrl;
-    } else {
+      if (paymentUrl) {
+        setShowConfirmation(true);
+        navigate(paymentUrl, { state: {name, sheetID, merchantOrderId } });
+      } else {
         throw new Error('No payment URL received');
-    }
+      }
     } catch (error) {
       console.error('Error initiating PhonePe payment:', error);
       toast.error('Failed to initiate payment. Please try again.');
-      setIsLoading(false);
       setShowConfirmation(true);
     }
   };
