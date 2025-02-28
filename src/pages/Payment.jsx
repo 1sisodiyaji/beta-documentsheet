@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +8,6 @@ const Payment = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { amount, name, sheetID, serialNumber } = location.state || {};
-  const isPaymentInitialized = useRef(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
 
@@ -33,26 +32,19 @@ const Payment = () => {
           name,
           sheetID,
           serialNumber,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!data || !data.redirectUrl) {
-        throw new Error('Failed to initiate payment');
-      }
-
-      localStorage.setItem(
-        'phonepe_payment_details',
-        JSON.stringify({
-          sheetID,
-          name,
-          transactionId: data.merchantTransactionId,
-          amount,
+          redirectUrl: `${window.location.origin}/payment-callback`
         })
-      );
-
-      window.location.href = data.redirectUrl;
+      }); 
+      const data = await response.json();
+      console.log(data);
+      const { paymentUrl, merchantOrderId } = data;
+      console.log(paymentUrl, merchantOrderId);
+      if (paymentUrl) { 
+        localStorage.setItem('currentPaymentId', merchantOrderId);
+        window.location.href = paymentUrl;
+    } else {
+        throw new Error('No payment URL received');
+    }
     } catch (error) {
       console.error('Error initiating PhonePe payment:', error);
       toast.error('Failed to initiate payment. Please try again.');
