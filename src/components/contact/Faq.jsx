@@ -13,7 +13,7 @@ const FAQ = () => (
       <div className="flex justify-center">
         <Pill text={'FAQ'} />
       </div>
-      
+
       <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
       <div className="space-y-4">
         {[

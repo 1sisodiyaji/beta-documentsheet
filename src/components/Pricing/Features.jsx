@@ -9,8 +9,8 @@ const Features = () => (
     viewport={{ once: true }}
     transition={{ duration: 0.8 }}
   >
-    <div className="flex justify-center"> 
-    <Pill text={'Why We'} />
+    <div className="flex justify-center">
+      <Pill text={'Why We'} />
     </div>
     <h2 className="text-3xl font-bold text-center mb-12">Why Choose Our Package?</h2>
     <div className="grid md:grid-cols-3 gap-8">

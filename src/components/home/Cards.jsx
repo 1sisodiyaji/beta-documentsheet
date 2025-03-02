@@ -12,10 +12,12 @@ const Cards = () => {
   return (
     <>
       <section className="py-24 ">
-        <article className="max-w-7xl text-center mx-auto space-y-4"> 
+        <article className="max-w-7xl text-center mx-auto space-y-4">
           <Pill text={'Why Choose Document Sheet !!'} />
           <p className="md:text-lg text-sm">
-            Document Sheet is a one-stop solution for all your document management needs. We provide customized solutions for various industries, ensuring that your documents are organized, secure, and accessible when you need them.
+            Document Sheet is a one-stop solution for all your document management needs. We provide
+            customized solutions for various industries, ensuring that your documents are organized,
+            secure, and accessible when you need them.
           </p>
         </article>
 

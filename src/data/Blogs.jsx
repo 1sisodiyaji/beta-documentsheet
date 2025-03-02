@@ -406,7 +406,8 @@ Through the use of QR codes, healthcare providers can improve patient access to 
     Integration with other business systems enhances the value of document management intelligence. By connecting document management data with CRM, ERP, or other business systems, organizations can create a more comprehensive view of their operations and identify opportunities for process improvement or cost reduction.
 
     Machine learning algorithms can continuously analyze document management patterns to suggest process improvements or automate routine tasks. This ongoing optimization helps organizations maintain efficiency and adapt to changing business needs while reducing manual intervention requirements.`,
-    image: 'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/17_business_intelligence.png',
+    image:
+      'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/17_business_intelligence.png',
     createdOn: '2024-03-05',
     tags: 'Business Intelligence, Analytics, Data Analysis, Process Optimization',
   },
@@ -616,10 +617,11 @@ Through the use of QR codes, healthcare providers can improve patient access to 
     Integration capabilities connect document management with other business systems. APIs and integration tools enable seamless data flow between document management and enterprise applications, creating more efficient and connected operations. This integration helps organizations maximize the value of their digital investments.
 
     Analytics and reporting tools provide insights into document management operations. Organizations can track usage patterns, identify bottlenecks, and optimize processes based on actual usage data. These insights help drive continuous improvement in document management practices.`,
-    image: 'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/27_digital_transformation.png',
+    image:
+      'https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732550943/27_digital_transformation.png',
     createdOn: '2024-03-15',
     tags: 'Digital Transformation, AI, Cloud, Automation',
-  }
+  },
 ];
 
 export default Blogs;

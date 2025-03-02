@@ -1,4 +1,3 @@
-
 const ScanHero = () => {
   return (
     <>

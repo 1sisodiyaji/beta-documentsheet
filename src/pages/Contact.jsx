@@ -46,10 +46,10 @@ const Contact = () => {
             <TabComponent />
           </motion.div>
         </div>
-     
-      <div className="flex justify-center">
-      <Pill text={'Query section'} />
-        </div>  
+
+        <div className="flex justify-center">
+          <Pill text={'Query section'} />
+        </div>
         <motion.h2
           className="md:text-2xl text-lg text-center font-semibold text-gray-800"
           initial={{ opacity: 0 }}

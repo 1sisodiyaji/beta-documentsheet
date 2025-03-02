@@ -69,7 +69,7 @@ const FiveCards = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
-        > 
+        >
           <Pill text={' How It Works'} />
           <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl">
             Simple Steps to Get Started

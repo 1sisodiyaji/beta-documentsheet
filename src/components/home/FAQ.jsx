@@ -64,7 +64,7 @@ const FAQ = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <Pill text={'FAQ'}/>
+          <Pill text={'FAQ'} />
           <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl">
             Frequently Asked Questions
           </h2>
@@ -108,7 +108,7 @@ const FAQ = () => {
             whileTap={{ scale: 0.95 }}
             className="mt-6 px-6 py-3 bg-gradient-to-r from-[#219B9D] to-[#A7E4CD] text-white rounded-full font-medium hover:shadow-lg transition-shadow duration-200"
           >
-           <Link to={'/contact-us'} > Contact Support </Link> 
+            <Link to={'/contact-us'}> Contact Support </Link>
           </motion.button>
         </motion.div>
       </div>

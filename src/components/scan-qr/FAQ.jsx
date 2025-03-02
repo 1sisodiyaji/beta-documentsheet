@@ -7,19 +7,23 @@ const FAQ = () => {
   const faqs = [
     {
       question: 'How secure is the QR code scanning process?',
-      answer: 'Our QR code scanning process uses advanced encryption and secure protocols to ensure your documents remain protected. Each QR code is uniquely generated and can be set with access permissions.',
+      answer:
+        'Our QR code scanning process uses advanced encryption and secure protocols to ensure your documents remain protected. Each QR code is uniquely generated and can be set with access permissions.',
     },
     {
       question: 'Can I access documents offline after scanning?',
-      answer: 'Yes, you can enable offline access for specific documents. Once cached, these documents will be available even without an internet connection.',
+      answer:
+        'Yes, you can enable offline access for specific documents. Once cached, these documents will be available even without an internet connection.',
     },
     {
       question: 'What types of documents can I share via QR codes?',
-      answer: 'You can share virtually any type of document including PDFs, Word documents, images, and more. Our system supports all common file formats used in real estate transactions.',
+      answer:
+        'You can share virtually any type of document including PDFs, Word documents, images, and more. Our system supports all common file formats used in real estate transactions.',
     },
     {
       question: 'How long are QR codes valid?',
-      answer: 'You can set custom expiration dates for your QR codes. By default, they remain valid until you explicitly disable them through your account settings.',
+      answer:
+        'You can set custom expiration dates for your QR codes. By default, they remain valid until you explicitly disable them through your account settings.',
     },
   ];
 

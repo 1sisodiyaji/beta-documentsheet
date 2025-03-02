@@ -42,7 +42,7 @@ const Pricing = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
-        > 
+        >
           <Pill text={'Simple Pricing'} />
           <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl">
             Start Managing Your Documents Today
@@ -157,7 +157,6 @@ const Pricing = () => {
             </p>
           </div>
         </motion.div>
- 
       </div>
     </section>
   );

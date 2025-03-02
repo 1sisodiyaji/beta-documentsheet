@@ -45,7 +45,11 @@ const Banner = ({ title, text }) => {
           </motion.h1>
           <p className="mt-4">{text}</p>
 
-          <motion.div className="absolute bottom-0 left-0 -z-1 w-full" initial="hidden" animate="visible">
+          <motion.div
+            className="absolute bottom-0 left-0 -z-1 w-full"
+            initial="hidden"
+            animate="visible"
+          >
             <svg
               width="1725"
               height="195"

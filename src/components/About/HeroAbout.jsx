@@ -1,4 +1,4 @@
-import Pill from "../common/Pill";
+import Pill from '../common/Pill';
 
 const HeroAbout = () => {
   return (

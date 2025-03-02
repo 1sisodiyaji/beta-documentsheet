@@ -7,7 +7,7 @@ const Empowering = () => {
       <div className="my-24 p-1">
         <section className="flex md:flex-row flex-col justify-around items-center md:w-[80vw] mx-auto">
           <article className="space-y-6 md:w-1/2">
-          <Pill text={'real estate professionals'} />
+            <Pill text={'real estate professionals'} />
             <h1 className="md:text-3xl text-xl font-semibold py-1">
               Empowering Your Transactions, Simplifying Processes
             </h1>

@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const stats = [
-  { number: 10000, label: "Active Users" },
-  { number: 50000, label: "Documents Created" },
-  { number: 99.9, label: "Satisfaction Rate" },
+  { number: 10000, label: 'Active Users' },
+  { number: 50000, label: 'Documents Created' },
+  { number: 99.9, label: 'Satisfaction Rate' },
 ];
 
 const StatCounter = ({ value }) => {
@@ -33,13 +33,10 @@ const StatCounter = ({ value }) => {
 
   return (
     <div className="text-2xl font-bold text-[#219B9D]">
-      {value % 1 !== 0
-        ? count.toFixed(1) + "%"
-        : Math.floor(count).toLocaleString()}
+      {value % 1 !== 0 ? count.toFixed(1) + '%' : Math.floor(count).toLocaleString()}
     </div>
   );
 };
-
 
 const Hero = () => {
   return (
@@ -65,12 +62,12 @@ const Hero = () => {
         >
           <motion.h1
             className="max-w-3xl mb-3 text-4xl font-bold md:text-5xl text-center md:text-start"
-            style={{ lineHeight: "75px" }}
+            style={{ lineHeight: '75px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Trusted Documents For Your{" "}
+            Trusted Documents For Your{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
               Real Estate
             </span>
@@ -89,7 +86,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Effortless and reliable document solutions for real estate{" "}
+            Effortless and reliable document solutions for real estate{' '}
             <br className="hidden md:block" /> — because every detail matters.
           </motion.p>
 
@@ -169,7 +166,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <motion.img
-            src={"/assets/homepage_hero.webp"}
+            src={'/assets/homepage_hero.webp'}
             width={1000}
             height={1000}
             loading="lazy"

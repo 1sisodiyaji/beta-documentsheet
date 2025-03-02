@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { useUserContext } from '../context/UserContext';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { sheetId } = location.state || {};
-  const { Name } = location.state || 'Unknown';
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasFetched = useRef(false);
+  const { paymentData, clearPaymentData } = useUserContext();
+  const { name, sheetID } = paymentData;
 
   const handleRatingClick = (star) => {
     setRating(star);
@@ -35,7 +35,7 @@ const SuccessPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: Name,
+          name,
           email,
           mobile,
           rating,
@@ -49,26 +49,24 @@ const SuccessPage = () => {
       }
 
       toast.success('Feedback submitted successfully!');
-      setRating(0); // Reset rating
-      setDescription(''); // Reset description
+      setRating(0);
+      setDescription('');
     } catch (error) {
       console.error('SuccessPage - Feedback Error:', error);
       toast.error('Something went wrong. Please try again.');
     } finally {
-      setIsSubmitting(false); // End submission process
+      setIsSubmitting(false);
     }
   };
 
-  const DownloadSheet = async (sheetId) => {
-    console.log('SuccessPage - Downloading sheet:', sheetId);
-    if (!sheetId) {
-      console.log('SuccessPage - Sheet ID missing');
+  const DownloadSheet = async (sheetID) => {
+    if (!sheetID) {
       toast.error('Sheet Not Found');
       return;
     }
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-Sheet/${sheetId}`,
+        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-Sheet/${sheetID}`,
         {
           responseType: 'blob',
         }
@@ -79,7 +77,7 @@ const SuccessPage = () => {
         const fileURL = URL.createObjectURL(fileBlob);
         const link = document.createElement('a');
         link.href = fileURL;
-        link.download = `Document-Sheet${sheetId}.pdf`;
+        link.download = `Document-Sheet${sheetID}.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -94,16 +92,14 @@ const SuccessPage = () => {
     }
   };
 
-  const DownloadBill = async (sheetId) => {
-    console.log('SuccessPage - Downloading bill:', sheetId);
-    if (!sheetId) {
-      console.log('SuccessPage - Bill ID missing');
+  const DownloadBill = async (sheetID) => {
+    if (!sheetID) {
       toast.error('Sheet Not Found');
       return;
     }
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-bill/${sheetId}`,
+        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-bill/${sheetID}`,
         {
           responseType: 'blob',
         }
@@ -114,7 +110,7 @@ const SuccessPage = () => {
         const fileURL = URL.createObjectURL(fileBlob);
         const link = document.createElement('a');
         link.href = fileURL;
-        link.download = `Invoice-${sheetId}.pdf`;
+        link.download = `Invoice-${sheetID}.pdf`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -130,7 +126,7 @@ const SuccessPage = () => {
   };
 
   const ShiftToHome = (route) => {
-    window.history.replaceState(null, '');
+    clearPaymentData();
     navigate(route);
   };
 
@@ -141,12 +137,11 @@ const SuccessPage = () => {
       navigate('/');
       return;
     }
-    console.log(sheetId);
     if (hasFetched.current) return;
     hasFetched.current = true;
-    DownloadSheet(sheetId);
-    DownloadBill(sheetId);
-  }, [sheetId, navigate]);
+    DownloadSheet(sheetID);
+    DownloadBill(sheetID);
+  }, [sheetID, navigate]);
 
   return (
     <>
@@ -155,7 +150,7 @@ const SuccessPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-end pr-8">
             <button
-              onClick={() => DownloadBill(sheetId)}
+              onClick={() => DownloadBill(sheetID)}
               className="px-6 py-2 rounded-md bg-green-200 text-green-800 font-medium hover:bg-green-300 transition"
             >
               Get Invoice

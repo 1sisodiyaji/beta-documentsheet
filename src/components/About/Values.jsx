@@ -9,8 +9,13 @@ const Values = () => (
     viewport={{ once: true }}
   >
     <div className="max-w-7xl mx-auto px-4">
-      <div className="flex justify-center w-full"> <Pill text="Our Core Values" /> </div>
-      <h2 className="text-3xl font-bold text-center mb-12">Building Trust Through Integrity & Excellence</h2>
+      <div className="flex justify-center w-full">
+        {' '}
+        <Pill text="Our Core Values" />{' '}
+      </div>
+      <h2 className="text-3xl font-bold text-center mb-12">
+        Building Trust Through Integrity & Excellence
+      </h2>
       <div className="grid md:grid-cols-3 gap-8">
         {[
           {

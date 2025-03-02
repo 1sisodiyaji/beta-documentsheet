@@ -7,11 +7,13 @@ import StatesData from '../data/AddressData.json';
 import Banner from '../components/common/Banner';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useUserContext } from '../context/UserContext';
 
 const CreateNewSheet = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { updatePaymentData } = useUserContext();
 
   const [docData, setDocData] = useState({
     UserName: '',
@@ -59,7 +61,7 @@ const CreateNewSheet = () => {
     setDocData({
       ...docData,
       [name]: value,
-      ...(name === 'state' && { District: '' }), // Reset District if state changes
+      ...(name === 'state' && { District: '' }),
     });
   };
 
@@ -116,6 +118,21 @@ const CreateNewSheet = () => {
       });
       
       navigate('/payment', { state: { amount, name, sheetID, serialNumber } });
+      if (response.data.success) {
+        const { amount, name, _id, serialNumbers } = response.data.data;
+        console.log('Sheet Created:', response.data.data);
+        const serialNumberValues = serialNumbers.map(item => item.serialNumber);
+        updatePaymentData({ 
+          amount, 
+          name, 
+          sheetID: _id, 
+          serialNumber: serialNumberValues 
+        });
+        navigate('/payment');
+      } else {
+        toast.error('Failed to Create Sheet');
+        return;
+      }
     } catch (error) {
       console.error('CreateNewSheet - Error:', error.response?.data || error.message);
       toast.error('Failed to create sheet. Please try again.');

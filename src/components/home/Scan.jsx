@@ -30,7 +30,7 @@ const Scan = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-            > 
+            >
               <Pill text={'Quick Access'} />
               <h2 className="mt-2 text-4xl font-bold text-gray-900 leading-tight">
                 Instant Access with{' '}

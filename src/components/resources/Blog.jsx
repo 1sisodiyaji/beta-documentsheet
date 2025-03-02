@@ -11,23 +11,28 @@ const Blog = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Get unique tags from all blogs
-  const allTags = ['all', ...new Set(Blogs.flatMap(blog => blog.tags.split(',').map(tag => tag.trim())))];
+  const allTags = [
+    'all',
+    ...new Set(Blogs.flatMap((blog) => blog.tags.split(',').map((tag) => tag.trim()))),
+  ];
 
   // Filter blogs based on selected tag and search query
-  const filteredBlogs = Blogs.filter(blog => {
-    const matchesTag = selectedTag === 'all' || blog.tags.toLowerCase().includes(selectedTag.toLowerCase());
-    const matchesSearch = blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         blog.description.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredBlogs = Blogs.filter((blog) => {
+    const matchesTag =
+      selectedTag === 'all' || blog.tags.toLowerCase().includes(selectedTag.toLowerCase());
+    const matchesSearch =
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesTag && matchesSearch;
   });
 
-  const featuredBlogs = filteredBlogs.filter(blog => blog.featured);
-  const regularBlogs = filteredBlogs.filter(blog => !blog.featured);
+  const featuredBlogs = filteredBlogs.filter((blog) => blog.featured);
+  const regularBlogs = filteredBlogs.filter((blog) => !blog.featured);
 
   return (
     <div className="max-w-7xl mx-auto my-16 px-4">
       {/* Search and Filter Section */}
-      <motion.div 
+      <motion.div
         className="mb-12"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -56,15 +61,16 @@ const Blog = () => {
               />
             </svg>
           </div>
-          
+
           <div className="flex gap-3 overflow-x-auto scollbar-hide pb-2 w-full md:w-auto">
             {allTags.map((tag) => (
               <motion.button
                 key={tag}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap
-                  ${selectedTag === tag 
-                    ? 'bg-orange-500 text-white' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ${
+                    selectedTag === tag
+                      ? 'bg-orange-500 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 onClick={() => setSelectedTag(tag)}
                 whileHover={{ scale: 1.05 }}
@@ -146,8 +152,18 @@ const Blog = () => {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <div className="flex items-center text-sm text-gray-500">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      className="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
                     <TimeCalculator text={blog.description} />
                   </div>
