@@ -36,6 +36,7 @@ const CreateNewSheet = () => {
   });
 
   const validateFields = () => {
+    console.log('CreateNewSheet - Validating fields:', docData);
     const tempErrors = {};
     let isValid = true;
 
@@ -47,12 +48,14 @@ const CreateNewSheet = () => {
       }
     });
 
+    console.log('CreateNewSheet - Validation results:', { isValid, errors: tempErrors });
     setErrors(tempErrors);
     return isValid;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log('CreateNewSheet - Input change:', { field: name, value });
     setDocData({
       ...docData,
       [name]: value,
@@ -68,7 +71,9 @@ const CreateNewSheet = () => {
     Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
   const onHandleDocCreated = async () => {
+    console.log('CreateNewSheet - Starting document creation with data:', docData);
     if (!validateFields()) {
+      console.log('CreateNewSheet - Validation failed');
       toast.error('Please fill all the fields');
       return;
     }
@@ -77,18 +82,23 @@ const CreateNewSheet = () => {
     const todayFormatted = today.toISOString().split('T')[0];
 
     if (docData.Date < todayFormatted) {
+      console.log('CreateNewSheet - Invalid date selected:', docData.Date);
       toast.error('Please do not select past dates.');
       return;
     }
 
     try {
       setLoading(true);
+      console.log('CreateNewSheet - Sending API request');
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/api/user/create-sheet`,
         docData
       );
 
+      console.log('CreateNewSheet - API Response:', response.data);
+
       if (response.success === false) {
+        console.log('CreateNewSheet - API returned success: false');
         toast.error('Failed to Create Sheet');
         return;
       }
@@ -97,9 +107,17 @@ const CreateNewSheet = () => {
       const amount = response.data.data.amount;
       const name = docData.UserName;
       const serialNumber = response.data.data.serialNumbers.map((item) => item.serialNumber);
+      
+      console.log('CreateNewSheet - Navigating to payment with data:', {
+        sheetID,
+        amount,
+        name,
+        serialNumber
+      });
+      
       navigate('/payment', { state: { amount, name, sheetID, serialNumber } });
     } catch (error) {
-      console.error('Error creating sheet:', error.response?.data || error.message);
+      console.error('CreateNewSheet - Error:', error.response?.data || error.message);
       toast.error('Failed to create sheet. Please try again.');
     } finally {
       setLoading(false);

@@ -8,12 +8,15 @@ const Payment = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { amount, name, sheetID, serialNumber } = location.state || {};
-  const isPaymentInitialized = useRef(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
+  const merchantTransactionId = `TXN_ID_${Date.now()}`;
+  const merchantUserId = `MIUI_${Date.now()}`;
 
   useEffect(() => {
+    console.log('Payment Page - Initial Data:', { amount, name, sheetID, serialNumber });
     if (!amount || !name || !sheetID || !serialNumber) {
+      console.log('Payment Page - Missing Data, redirecting to create-new-sheet');
       toast.error('Missing or invalid payment details!');
       navigate('/create-new-sheet');
       return;
@@ -21,6 +24,14 @@ const Payment = () => {
   }, [amount, name, sheetID, serialNumber, navigate]);
 
   const handlePaymentInitiation = async () => {
+    console.log('Payment Page - Initiating payment with data:', {
+      amount,
+      name,
+      sheetID,
+      serialNumber,
+      merchantTransactionId,
+      merchantUserId
+    });
     setIsLoading(true);
     setShowConfirmation(false);
 
@@ -33,28 +44,22 @@ const Payment = () => {
           name,
           sheetID,
           serialNumber,
+          merchantTransactionId,
+          merchantUserId
         }),
       });
 
       const data = await response.json();
+      console.log('Payment Page - Payment API Response:', data);
 
       if (!data || !data.redirectUrl) {
         throw new Error('Failed to initiate payment');
       }
 
-      localStorage.setItem(
-        'phonepe_payment_details',
-        JSON.stringify({
-          sheetID,
-          name,
-          transactionId: data.merchantTransactionId,
-          amount,
-        })
-      );
-
+      console.log('Payment Page - Redirecting to:', data.redirectUrl);
       window.location.href = data.redirectUrl;
     } catch (error) {
-      console.error('Error initiating PhonePe payment:', error);
+      console.error('Payment Page - Error:', error);
       toast.error('Failed to initiate payment. Please try again.');
       setIsLoading(false);
       setShowConfirmation(true);

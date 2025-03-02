@@ -18,7 +18,9 @@ const SuccessPage = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('SuccessPage - Submitting feedback:', { rating, description, Name });
     if (!rating || !description) {
+      console.log('SuccessPage - Missing feedback data');
       toast.error('Please fill in both rating and description before submitting.');
       return;
     }
@@ -41,6 +43,7 @@ const SuccessPage = () => {
         }),
       });
 
+      console.log('SuccessPage - Feedback API Response:', response);
       if (!response.ok) {
         throw new Error('Failed to submit feedback');
       }
@@ -49,6 +52,7 @@ const SuccessPage = () => {
       setRating(0); // Reset rating
       setDescription(''); // Reset description
     } catch (error) {
+      console.error('SuccessPage - Feedback Error:', error);
       toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false); // End submission process
@@ -56,7 +60,9 @@ const SuccessPage = () => {
   };
 
   const DownloadSheet = async (sheetId) => {
+    console.log('SuccessPage - Downloading sheet:', sheetId);
     if (!sheetId) {
+      console.log('SuccessPage - Sheet ID missing');
       toast.error('Sheet Not Found');
       return;
     }
@@ -67,6 +73,7 @@ const SuccessPage = () => {
           responseType: 'blob',
         }
       );
+      console.log('SuccessPage - Sheet download response:', response.status);
       if (response.status === 200) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(fileBlob);
@@ -82,13 +89,15 @@ const SuccessPage = () => {
         toast.error('Failed to Download Sheet');
       }
     } catch (error) {
-      console.error(error);
+      console.error('SuccessPage - Sheet download error:', error);
       toast.error('Failed to Download Sheet');
     }
   };
 
   const DownloadBill = async (sheetId) => {
+    console.log('SuccessPage - Downloading bill:', sheetId);
     if (!sheetId) {
+      console.log('SuccessPage - Bill ID missing');
       toast.error('Sheet Not Found');
       return;
     }
@@ -99,6 +108,7 @@ const SuccessPage = () => {
           responseType: 'blob',
         }
       );
+      console.log('SuccessPage - Bill download response:', response.status);
       if (response.status === 200) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(fileBlob);
@@ -114,7 +124,7 @@ const SuccessPage = () => {
         toast.error('Failed to Download Invoice');
       }
     } catch (error) {
-      console.error(error);
+      console.error('SuccessPage - Bill download error:', error);
       toast.error('Failed to Download Invoice');
     }
   };
@@ -125,7 +135,9 @@ const SuccessPage = () => {
   };
 
   useEffect(() => {
+    console.log('SuccessPage - Initial load with sheetId:', sheetId);
     if (!sheetId) {
+      console.log('SuccessPage - No sheetId, redirecting to home');
       navigate('/');
       return;
     }
