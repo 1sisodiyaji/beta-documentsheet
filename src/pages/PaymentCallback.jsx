@@ -17,13 +17,18 @@ const PaymentCallback = () => {
 
   useEffect(() => {
     const checkPaymentStatus = async () => {
-      console.log('Checking payment status...'); // ✅ Debug: Function execution
+      console.log('Checking payment status...'); 
 
       try {
+        if(!merchantOrderId) {
+          console.error('Merchant Order ID is missing');
+          throw new Error('Merchant Order ID is missing');
+        }
+
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/user/verify-payment/${merchantOrderId}`
+          `${import.meta.env.VITE_BASE_URL}/api/user/verify_payment/${merchantOrderId}`
         );
-        console.log('API Response:', response.data); // ✅ Debug: Checking API response
+        console.log('API Response:', response.data); 
 
         const { data } = response;
 
