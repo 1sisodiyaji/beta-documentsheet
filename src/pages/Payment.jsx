@@ -24,14 +24,6 @@ const Payment = () => {
   }, [paymentData, navigate]);
 
   const handlePaymentInitiation = async () => {
-    console.log('[Payment] Initiating payment process');
-    console.log('[Payment] Payment details:', {
-      amount: paymentData.amount,
-      name: paymentData.name,
-      sheetID: paymentData.sheetID,
-      serialNumber: paymentData.serialNumber,
-    });
-
     setIsLoading(true);
     setShowConfirmation(false);
 

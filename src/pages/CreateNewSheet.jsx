@@ -78,9 +78,7 @@ const CreateNewSheet = () => {
     Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
   const onHandleDocCreated = async () => {
-    console.log('[CreateNewSheet] Starting sheet creation process');
-    console.log('[CreateNewSheet] Form data:', docData);
-
+   
     if (!validateFields()) {
       console.log('[CreateNewSheet] Form validation failed');
       toast.error('Please fill all the fields');
@@ -104,8 +102,6 @@ const CreateNewSheet = () => {
         `${import.meta.env.VITE_BASE_URL}/api/user/create-sheet`,
         docData
       );
-
-      console.log('[CreateNewSheet] API Response:', response.data);
 
       if (response.data.success) {
         const { amount, name, _id: sheetID, serialNumbers } = response.data.data;
