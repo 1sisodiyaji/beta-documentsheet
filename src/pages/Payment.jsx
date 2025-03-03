@@ -10,8 +10,6 @@ const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
   const { paymentData, updatePaymentData } = useUserContext();
-  const merchantTransactionId = `TXN_ID_${Date.now()}`;
-  const merchantUserId = `MIUI_${Date.now()}`;
 
   useEffect(() => {
     console.log('[Payment] Component mounted');
@@ -32,8 +30,6 @@ const Payment = () => {
       name: paymentData.name,
       sheetID: paymentData.sheetID,
       serialNumber: paymentData.serialNumber,
-      merchantTransactionId,
-      merchantUserId
     });
 
     setIsLoading(true);
@@ -48,9 +44,8 @@ const Payment = () => {
           amount: paymentData.amount,
           name: paymentData.name,
           sheetID: paymentData.sheetID,
-          serialNumber: paymentData.serialNumber,
-          merchantTransactionId,
-          merchantUserId
+          serialNumber: paymentData.serialNumber, 
+          redirectUrl : `${window.location.origin}/payment-callback`
         }),
       });
 

@@ -29,9 +29,9 @@ const PaymentCallback = () => {
 
         if (data.success) {
           setPaymentDetails(data);
-          setStatus(data.code === 'PAYMENT_SUCCESS' ? 'SUCCESS' : 'FAILED');
+          setStatus(data.code);
 
-          if (data.code === 'PAYMENT_SUCCESS') {
+          if (data.code === 'SUCCESS') {
             console.log('Payment Successful! Redirecting to feedback page.');
             navigate('/feedback');
           }
