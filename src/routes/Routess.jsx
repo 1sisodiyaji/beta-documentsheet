@@ -17,6 +17,8 @@ import Footer from '../components/common/Footer';
 import NotFoundPage from '../pages/NotFoundPage';
 import RefundPolicy from '../pages/RefundPolicy';
 import PaymentCallback from '../pages/PaymentCallback';
+import Bill from '../pages/Bill';
+import Certificate from '../pages/Certificate';
 
 const Routess = () => {
   const location = useLocation();
@@ -42,6 +44,8 @@ const Routess = () => {
         <Route path="/terms-condition" element={<TermsCondition />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/feedback" element={<SuccessPage />} />
+        <Route path="/certificate" element={<Certificate />} />
+        <Route path="/bill/:serialNumber  " element={<Bill />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
