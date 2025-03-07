@@ -16,8 +16,7 @@ import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import NotFoundPage from '../pages/NotFoundPage';
 import RefundPolicy from '../pages/RefundPolicy';
-import PaymentCallback from '../pages/PaymentCallback';
-import Bill from '../pages/Bill';
+import PaymentCallback from '../pages/PaymentCallback'; 
 import Certificate from '../pages/Certificate';
 
 const Routess = () => {
@@ -43,9 +42,8 @@ const Routess = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-condition" element={<TermsCondition />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
-        <Route path="/feedback" element={<SuccessPage />} />
-        <Route path="/certificate" element={<Certificate />} />
-        <Route path="/bill/:serialNumber  " element={<Bill />} />
+        <Route path="/feedback" element={<SuccessPage />} /> 
+        <Route path="/certificate/:serialNumber" element={<Certificate />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

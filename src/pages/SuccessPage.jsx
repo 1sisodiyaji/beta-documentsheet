@@ -18,14 +18,7 @@ const SuccessPage = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('[SuccessPage] Submitting feedback:', { 
-      rating, 
-      description, 
-      name: paymentData.name 
-    });
-
     if (!rating || !description) {
-      console.log('[SuccessPage] Missing feedback data');
       toast.error('Please fill in both rating and description before submitting.');
       return;
     }
@@ -35,7 +28,6 @@ const SuccessPage = () => {
     const mobile = '0000000000';
 
     try {
-      console.log('[SuccessPage] Sending feedback API request');
       const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/user/create-testimonial`, {
         method: 'POST',
         headers: {
@@ -50,13 +42,11 @@ const SuccessPage = () => {
         }),
       });
 
-      console.log('[SuccessPage] Feedback API Response:', response);
-      
+    
       if (!response.ok) {
         throw new Error('Failed to submit feedback');
       }
 
-      console.log('[SuccessPage] Feedback submitted successfully');
       toast.success('Feedback submitted successfully!');
       setRating(0);
       setDescription('');
@@ -69,8 +59,7 @@ const SuccessPage = () => {
   };
 
   const DownloadSheet = async (sheetID) => {
-    console.log('[SuccessPage] Starting sheet download:', sheetID);
-    
+   
     if (!sheetID) {
       console.log('[SuccessPage] No sheetID provided');
       toast.error('Sheet Not Found');
@@ -78,7 +67,6 @@ const SuccessPage = () => {
     }
 
     try {
-      console.log('[SuccessPage] Sending sheet download request');
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/user/genrate-Sheet/${sheetID}`,
         {
@@ -86,10 +74,8 @@ const SuccessPage = () => {
         }
       );
 
-      console.log('[SuccessPage] Sheet download response status:', response.status);
-      
+     
       if (response.status === 200) {
-        console.log('[SuccessPage] Creating sheet download link');
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(fileBlob);
         const link = document.createElement('a');
@@ -111,8 +97,7 @@ const SuccessPage = () => {
   };
 
   const DownloadBill = async (sheetID) => {
-    console.log('[SuccessPage] Starting bill download:', sheetID);
-    
+   
     if (!sheetID) {
       console.log('[SuccessPage] No sheetID provided');
       toast.error('Sheet Not Found');
@@ -120,7 +105,6 @@ const SuccessPage = () => {
     }
 
     try {
-      console.log('[SuccessPage] Sending bill download request');
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/api/user/genrate-bill/${sheetID}`,
         {
@@ -128,7 +112,6 @@ const SuccessPage = () => {
         }
       );
 
-      console.log('[SuccessPage] Bill download response status:', response.status);
       
       if (response.status === 200) {
         console.log('[SuccessPage] Creating bill download link');
@@ -153,16 +136,12 @@ const SuccessPage = () => {
   };
 
   const ShiftToHome = (route) => {
-    console.log('[SuccessPage] Navigating to:', route);
-    console.log('[SuccessPage] Clearing payment data');
     clearPaymentData();
     navigate(route);
   };
 
   useEffect(() => {
-    console.log('[SuccessPage] Component mounted');
-    console.log('[SuccessPage] Payment data from context:', paymentData);
-    
+   
     if (!paymentData.sheetID) {
       console.log('[SuccessPage] No sheetID found, redirecting to home');
       navigate('/');
@@ -173,8 +152,7 @@ const SuccessPage = () => {
       console.log('[SuccessPage] Documents already fetched');
       return;
     }
-
-    console.log('[SuccessPage] Starting document downloads');
+ 
     hasFetched.current = true;
     DownloadSheet(paymentData.sheetID);
     DownloadBill(paymentData.sheetID);
@@ -182,7 +160,7 @@ const SuccessPage = () => {
 
   return (
     <>
-      <div className="pt-8 min-h-screen bg-[url('https://res.cloudinary.com/dlgyf2xzu/image/upload/v1734580950/Checker_euvc9v.png')] bg-no-repeat bg-cover bg-center mx-auto">
+      <div className="py-24 min-h-screen bg-[url('https://res.cloudinary.com/dlgyf2xzu/image/upload/v1734580950/Checker_euvc9v.png')] bg-no-repeat bg-cover bg-center mx-auto">
         {/* Get Invoice Button */}
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-end pr-8">

@@ -36,7 +36,7 @@ const Features = () => {
           className="text-center mb-16"
         >
           <Pill text={'Key Features'} />
-          <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl">
+          <h2 className="mt-2 text-2xl font-bold text-gray-900 md:text-5xl">
             Why Choose Our QR Solution
           </h2>
         </motion.div>

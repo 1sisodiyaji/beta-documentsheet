@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
     serialNumber: [],
     merchantOrderId: '',
     
-  });
+  }); 
 
   const saveToCookie = (data) => {
     const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();

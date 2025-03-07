@@ -9,15 +9,10 @@ const Payment = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
-  const { paymentData, updatePaymentData } = useUserContext();
+  const { paymentData, updatePaymentData ,clearPaymentData} = useUserContext();
 
-  useEffect(() => {
-    console.log('[Payment] Component mounted');
-    console.log('[Payment] Payment data from context:', paymentData);
-    
+  useEffect(() => {  
     if (!paymentData.amount || !paymentData.name || !paymentData.sheetID || !paymentData.serialNumber) {
-      console.log('[Payment] Missing payment data, redirecting to create-new-sheet');
-      toast.error('Missing or invalid payment details!');
       navigate('/create-new-sheet');
       return;
     }
@@ -45,12 +40,8 @@ const Payment = () => {
       console.log('[Payment] Payment API Response:', data);
 
       const { paymentUrl, merchantOrderId } = data;
-      if (paymentUrl) {
-        console.log('[Payment] Payment URL received:', paymentUrl);
-        console.log('[Payment] Updating payment data with merchantOrderId:', merchantOrderId);
-        updatePaymentData({ ...paymentData, merchantOrderId });
-        
-        console.log('[Payment] Redirecting to payment URL');
+      if (paymentUrl) { 
+        updatePaymentData({ ...paymentData, merchantOrderId }); 
         window.location.href = paymentUrl;
       } else {
         console.error('[Payment] No payment URL in response');
@@ -65,6 +56,10 @@ const Payment = () => {
     }
   };
 
+  const CancelPayment = () => {
+    clearPaymentData();
+    navigate('/create-new-sheet')
+  }
   const PaymentConfirmation = () => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -239,7 +234,7 @@ const Payment = () => {
           <span>Pay with PhonePe</span>
         </motion.button>
         <motion.button
-          onClick={() => navigate('/create-new-sheet')}
+          onClick={CancelPayment}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="md:w-1/2 w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center space-x-2"

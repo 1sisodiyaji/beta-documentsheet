@@ -10,10 +10,8 @@ const PaymentCallback = () => {
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { paymentData } = useUserContext();
+  const { paymentData ,clearPaymentData} = useUserContext();
   const { merchantOrderId } = paymentData;
-
-  console.log('merchantOrderId:', merchantOrderId); 
 
   useEffect(() => {
     const checkPaymentStatus = async () => {
@@ -61,7 +59,7 @@ const PaymentCallback = () => {
       await checkPaymentStatus();
     }, 3000);
 
-    checkPaymentStatus(); // Initial API call
+    checkPaymentStatus();
 
     return () => {
       console.log('Clearing interval on unmount.');
@@ -104,6 +102,10 @@ const PaymentCallback = () => {
 
   const content = getStatusContent();
 
+  const ClearCookieAndData = () => {
+    clearPaymentData();
+    navigate('/');
+  }
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50">
       <motion.div
@@ -117,8 +119,8 @@ const PaymentCallback = () => {
 
         {(status === 'COMPLETED' || status === 'FAILED' || status === 'error') && (
           <button
-            onClick={() => navigate('/')}
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors"
+            onClick={ClearCookieAndData}
+            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors"
           >
             Back to Home
           </button>

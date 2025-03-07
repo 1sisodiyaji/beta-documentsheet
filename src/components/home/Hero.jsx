@@ -93,7 +93,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/create-new-sheet"
-                className="inline-flex items-center px-6 py-3 text-base font-medium text-white rounded-full bg-gradient-to-r from-[#219B9D] to-[#219B9D]/80 hover:from-[#A7E4CD] hover:to-[#A7E4CD]/80 hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center md:px-6 md:py-3 px-3 py-1 text-base font-medium text-white rounded-full bg-gradient-to-r from-[#219B9D] to-[#219B9D]/80 hover:from-[#A7E4CD] hover:to-[#A7E4CD]/80 hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Create Your Sheet
                 <motion.svg
@@ -116,7 +116,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 to="/scan-qr"
-                className="inline-flex items-center px-6 py-3 text-base font-medium text-black bg-white border-2 border-green-400 rounded-full hover:bg-green-50 transition-all duration-300 shadow-md hover:shadow-lg"
+                className="inline-flex items-center md:px-6 md:py-3 px-3 py-1 text-base font-medium text-black bg-white border-2 border-green-400 rounded-full hover:bg-green-50 transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 <motion.i
                   className="fi fi-rs-qr-scan pe-2"

@@ -48,7 +48,7 @@ const ScanTabs = () => {
         <div className="flex space-x-4 justify-center">
           <motion.button
             type="button"
-            className={`tab relative px-6 py-3 rounded-lg font-medium transition-all ${
+            className={`tab relative md:px-6 md:py-3 px-3 py-1 rounded-lg font-medium transition-all ${
               activeTab === 'scanner'
                 ? 'bg-orange-500 text-white shadow-lg'
                 : 'bg-white text-gray-700 hover:bg-orange-100'
@@ -71,7 +71,7 @@ const ScanTabs = () => {
           </motion.button>
           <motion.button
             type="button"
-            className={`tab relative px-6 py-3 rounded-lg font-medium transition-all ${
+            className={`tab relative md:px-6 md:py-3 px-3 py-1 rounded-lg font-medium transition-all ${
               activeTab === 'serialSearch'
                 ? 'bg-orange-500 text-white shadow-lg'
                 : 'bg-white text-gray-700 hover:bg-orange-100'
@@ -235,6 +235,9 @@ const ScanTabs = () => {
                                 </span>
                               </div>
                             ))}
+
+                           <div className="hover:underline"> Get Certificate of your Sheet </div> 
+
                           </div>
                         </div>
                       </motion.div>

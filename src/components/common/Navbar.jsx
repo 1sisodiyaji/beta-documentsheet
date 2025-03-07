@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Home, ScanBarcode, IndianRupee, Phone, Info } from 'lucide-react';
+import { Home, ScanBarcode, IndianRupee, Phone, BookCheck } from 'lucide-react';
 
 const Navbar = () => {
   const [scrollWidth, setScrollWidth] = useState(0);
@@ -9,9 +9,9 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/scan-qr', label: 'Scan QR', icon: ScanBarcode },
     { href: '/about', label: 'About', icon: Home },
-    { href: '/resources', label: 'Resources', icon: Info },
+    { href: '/scan-qr', label: 'Scan QR', icon: ScanBarcode }, 
+    { href: '/resources', label: 'Resources', icon: BookCheck },
     { href: '/pricing', label: 'Pricing', icon: IndianRupee },
     { href: '/contact-us', label: 'Contact Us', icon: Phone },
   ];
