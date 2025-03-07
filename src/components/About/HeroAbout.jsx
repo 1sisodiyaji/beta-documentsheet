@@ -7,9 +7,9 @@ const HeroAbout = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Image Section */}
           <div className="relative">
-            <div className="absolute bg-orange-100 w-full h-full rounded-full -top-10 -left-10 z-0"></div>
+            <div className="absolute bg-orange-100 w-full h-full rounded-full -top-10 lg:-left-8 z-0"></div>
             <div className="relative z-10">
-              <div className="flex space-x-4">
+              <div className="flex md:space-x-4  ">
                 <img
                   src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732434259/1a__4_-removebg-preview_gmm7s1.png"
                   alt="Lady in Car 1"
@@ -21,7 +21,7 @@ const HeroAbout = () => {
                 <img
                   src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1732545539/1_keu1x0.png"
                   alt="Lady in Car 2"
-                  className="w-1/3 rounded-lg shadow-lg"
+                  className=" w-1/4 sm:w-1/4 lg:w-1/3  rounded-lg shadow-lg"
                   width={1000}
                   height={1000}
                   loading="lazy"

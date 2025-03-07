@@ -68,18 +68,19 @@ const Navbar = () => {
               </span>
             </Link>
 
-            <div className="hidden md:flex space-x-6 rtl:space-x-reverse font-regular">
-              {navLinks.map((link) => (
+            <div className="hidden lg:flex space-x-6 rtl:space-x-reverse font-regular">
+             
+             {!isMenuOpen && ( navLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`py-2 px-3 flex items-center gap-2 hover:text-[#219B9D] transition-colors ${
+                  className={`py-2 px-3 flex items-center gap-2  hover:text-[#219B9D] transition-colors ${
                     pathname === link.href ? 'text-[#219B9D] font-medium' : 'text-gray-700'
                   }`}
                 >
-                  {link.label}
+                  {link.label} 
                 </Link>
-              ))}
+              )))}
             </div>
 
             {/* Right Section */}
@@ -87,7 +88,7 @@ const Navbar = () => {
               <Link to="/create-new-sheet">
                 <button
                   type="button"
-                  className="text-white bg-[#219B9D] hover:bg-[#219B9D]/90 font-medium rounded-3xl text-sm px-5 py-2.5 text-center hidden md:flex items-center gap-2 transition-all duration-200 hover:scale-105"
+                  className="text-white bg-[#219B9D] hover:bg-[#219B9D]/90 font-medium rounded-3xl text-sm px-5 md:px-2 md:py-1 lg:px-5 lg:py-2.5 text-center hidden lg:flex items-center gap-2 transition-all duration-200 hover:scale-105"
                 >
                   Get Your Sheet
                 </button>
@@ -96,7 +97,7 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#219B9D]"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#219B9D]"
                 aria-controls="navbar-sticky"
                 aria-expanded={isMenuOpen}
               >

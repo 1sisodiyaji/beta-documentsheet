@@ -46,27 +46,28 @@ const Contact = () => {
             <TabComponent />
           </motion.div>
         </div>
-
-        <div className="flex justify-center">
-          <Pill text={'Query section'} />
-        </div>
-        <motion.h2
-          className="md:text-2xl text-lg text-center font-semibold text-gray-800"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          Got a query? Let us know, and we&apos;ll respond promptly!
-        </motion.h2>
-
-        <div className="flex justify-center items-center">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
+        <div className="space-y-4">
+          <div className="flex  justify-center">
+            <Pill text={'Query section'} />
+          </div>
+          <motion.h2
+            className="md:text-2xl text-lg text-center font-semibold text-gray-800"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
           >
-            <ContactPageMessage />
-          </motion.div>
+            Got a query? Let us know, and we&apos;ll respond promptly!
+          </motion.h2>
+
+          <div className="flex justify-center items-center">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <ContactPageMessage />
+            </motion.div>
+          </div>
         </div>
       </motion.div>
       <Faq />

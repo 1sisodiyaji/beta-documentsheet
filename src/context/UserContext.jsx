@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
 
 const SECRET_KEY = 'documentsheet123@2024';
-const COOKIE_NAME = 'paymentData';
+const COOKIE_NAME = 'user_Details_DOC';
 
 const UserContext = createContext();
 
@@ -13,12 +13,13 @@ export const UserProvider = ({ children }) => {
     name: '',
     sheetID: '',
     serialNumber: [],
-    merchantOrderId: ''
+    merchantOrderId: '',
+    
   });
 
   const saveToCookie = (data) => {
     const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-    Cookies.set(COOKIE_NAME, encryptedData, { expires: 7 });
+    Cookies.set(COOKIE_NAME, encryptedData, { expires: 1/48 });
   };
 
   const loadFromCookie = () => {

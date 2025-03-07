@@ -4,7 +4,8 @@ import Pill from '../common/Pill';
 
 const CardGrid = () => {
   return (
-    <section className="md:py-24 py-16 max-w-7xl mx-auto px-4">
+    <section className="  w-80 ml-10 sm:border-blue-700 sm:w-3/4 sm:ml-20 md:border-yellow-600 md:ml-24  lg:border-green-600 lg:ml-32
+      ">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -13,21 +14,22 @@ const CardGrid = () => {
         className="text-center mb-12"
       >
         <Pill text={'Document Management'} />
-        <h2 className="mt-2 text-4xl font-bold text-gray-900 md:text-5xl">
+        <h2 className="mt-2 lg:text-4xl font-bold text-gray-900 md:text-5xl">
           Streamline Your Workflow
         </h2>
       </motion.div>
 
       <div className="grid grid-cols-4 md:gap-6 gap-2 p-1">
         <motion.div
-          className="col-span-3"
+          className="col-span-2"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
+         
         >
-          <div className="flex flex-col justify-center items-center md:min-h-64 p-5 bg-gradient-to-r from-orange-600 to-orange-300 border border-orange-200 rounded-lg shadow hover:scale-95 hover:shadow-lg transition-transform duration-300">
-            <h5 className="mb-2 md:text-3xl text-md font-bold tracking-tight text-white p-1">
+          <div className="flex flex-col justify-center items-center md:min-h-64 p-3 bg-gradient-to-r from-orange-600 to-orange-300 border border-orange-200 rounded-lg shadow hover:scale-95 hover:shadow-lg transition-transform duration-300">
+            <h5 className="mb-2 md:text-2xl text-md font-bold tracking-tight text-white p-1">
               Manage Your Documents Seamlessly
             </h5>
             <p className="font-normal text-white md:text-md text-xs">
@@ -44,7 +46,7 @@ const CardGrid = () => {
         </motion.div>
 
         <motion.div
-          className="col-span-1"
+          className="col-span-2"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}

@@ -11,7 +11,7 @@ const animationVariants = {
 const Cards = () => {
   return (
     <>
-      <section className="py-24 ">
+      <section className="py-24 border  ">
         <article className="max-w-7xl text-center mx-auto space-y-4">
           <Pill text={'Why Choose Document Sheet !!'} />
           <p className="md:text-lg text-sm">
@@ -21,13 +21,14 @@ const Cards = () => {
           </p>
         </article>
 
-        <section className="flex flex-wrap justify-center items-center md:py-12  gap-6  p-1">
+        <section className="flex flex-wrap justify-center items-center md:py-12  gap-6  p-1 ">
           <motion.div
             initial="hiddenLeft"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8 }}
             variants={animationVariants}
+           
           >
             <FlipCard
               title={'Digital Document'}

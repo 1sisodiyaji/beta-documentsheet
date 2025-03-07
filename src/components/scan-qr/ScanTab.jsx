@@ -44,7 +44,7 @@ const ScanTabs = () => {
 
   return (
     <section className="py-16 md:py-24 p-1">
-      <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-2xl max-w-2xl mx-auto mb-8">
+      <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-2xl max-w-2xl mx-auto mb-8 ">
         <div className="flex space-x-4 justify-center">
           <motion.button
             type="button"
@@ -102,7 +102,7 @@ const ScanTabs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="py-8"
+            className="py-8 "
           >
             <div className="max-w-7xl mx-auto rounded-xl p-6 bg-white shadow-lg">
               <div className="flex flex-col md:flex-row items-center gap-8">

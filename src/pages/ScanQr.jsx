@@ -34,11 +34,11 @@ const ScanQr = () => {
       </Helmet>
 
       <Banner title={'Scan QR'} text={'Access Your Documents Instantly'} />
-      <ScanHero />
-      <HowItWorks />
+     <ScanHero />
+   <HowItWorks />
       <Features />
       <ScanTabs />
-      <CardGrid />
+      <CardGrid /> 
       <FAQ />
     </>
   );

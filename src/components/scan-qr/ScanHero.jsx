@@ -2,7 +2,7 @@ const ScanHero = () => {
   return (
     <>
       <section className="py-16 md:py-24 p-1">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center ">
           {/* Left Content */}
           <div>
             <div className="flex">

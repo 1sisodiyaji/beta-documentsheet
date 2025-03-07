@@ -55,28 +55,22 @@ const Hero = () => {
       <div className="grid max-w-7xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 relative">
         {/* Left Section */}
         <motion.div
-          className="mr-auto place-self-center lg:col-span-6 p-1"
+          className="mr-auto place-self-center lg:col-span-6 p-1 space-y-4"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1
-            className="max-w-3xl mb-3 text-4xl font-bold md:text-5xl text-center md:text-start"
-            style={{ lineHeight: '1.6' }}
+            className="max-w-3xl lg:text-5xl  md:text-4xl text-3xl"
+            style={{ lineHeight: '1.3' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-            From Sheets To Success Privacy  At Every Step
-            </span>
-            <motion.span
-              className="inline-block bg-orange-400 px-4 py-1  mt-4 md:mt-0 rounded-3xl"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              100 GSM Quality PRINT
-            </motion.span>
+           From Sheets To 
+          <span className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-green-400 to-green-500 animate-pulse"> Success  </span>
+            Privacy  At Every Step    
+          <span className="text-transparent font-semibold bg-clip-text bg-gradient-to-r from-orange-400 to-orange-500"> 100 GSM Quality PRINT</span>
           </motion.h1>
 
           <motion.p
