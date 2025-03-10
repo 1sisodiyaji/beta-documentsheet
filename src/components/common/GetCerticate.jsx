@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { CheckCircle, TimerIcon } from 'lucide-react';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 
 const CertificateCallback = () => {
   const [status, setStatus] = useState('loading');
@@ -142,3 +142,4 @@ const CertificateCallback = () => {
 };
 
 export default CertificateCallback;
+5
