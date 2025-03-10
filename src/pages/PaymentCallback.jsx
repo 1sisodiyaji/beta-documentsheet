@@ -1,140 +1,269 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { motion } from 'framer-motion';
-import axios from 'axios';
-import { CheckCircle, SplineIcon, TimerIcon } from 'lucide-react';
+import { CheckCircle, XCircle, Loader } from 'lucide-react';
 import { useUserContext } from '../context/UserContext';
 
 const PaymentCallback = () => {
-  const [status, setStatus] = useState('loading');
-  const [paymentDetails, setPaymentDetails] = useState(null);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [status, setStatus] = useState('PENDING');
+  const [error, setError] = useState(null);
+  const [paymentDetails, setPaymentDetails] = useState(null);
   const { paymentData, clearPaymentData } = useUserContext();
-  const { merchantOrderId } = paymentData;
 
   useEffect(() => {
-    const checkPaymentStatus = async () => {
-      console.log('Checking payment status...');
+    const urlParams = new URLSearchParams(window.location.search);
+    const merchantTransactionId = urlParams.get('merchantTransactionId');
+    const status = urlParams.get('status');
 
+    if (!merchantTransactionId || !status) {
+      setError('Invalid payment callback');
+      setStatus('error');
+      return;
+    }
+
+    const verifyPayment = async () => {
       try {
-        if (!merchantOrderId) {
-          console.error('Merchant Order ID is missing');
-          throw new Error('Merchant Order ID is missing');
-        }
-
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/user/verify_payment/${merchantOrderId}`
+        const response = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/user/verify-payment/${merchantTransactionId}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              status,
+              merchantOrderId: paymentData.merchantOrderId,
+            }),
+          }
         );
 
-        const { data } = response;
+        const data = await response.json();
 
         if (data.success) {
-          setPaymentDetails(data);
-          setStatus(data.status);
-
-          if (data.status === 'COMPLETED') {
-            console.log('Payment Successful! Redirecting to feedback page.');
-            navigate('/feedback');
-          }
+          setStatus('COMPLETED');
+          setPaymentDetails({
+            merchantTransactionId,
+            amount: data.amount,
+          });
         } else {
-          throw new Error(data.message || 'Payment verification failed');
+          setStatus('FAILED');
+          setError(data.message || 'Payment verification failed');
         }
       } catch (error) {
-        console.error('Error checking payment status:', error); // ✅ Debug: Log error details
+        console.error('[PaymentCallback] Payment verification error:', error);
         setStatus('error');
-        setError(error.response?.data?.error || error.message || 'Failed to verify payment status');
+        setError('Failed to verify payment');
       }
     };
 
-    const checkInterval = setInterval(async () => {
-      console.log(`Interval running: Current status = ${status}`); // ✅ Debug: Interval execution
+    verifyPayment();
+  }, [paymentData.merchantOrderId]);
 
-      if (status === 'COMPLETED' || status === 'FAILED') {
-        console.log('Clearing interval as payment status is final.');
-        clearInterval(checkInterval);
-        return;
-      }
-
-      await checkPaymentStatus();
-    }, 3000);
-
-    checkPaymentStatus();
-
-    return () => {
-      console.log('Clearing interval on unmount.');
-      clearInterval(checkInterval);
-    };
-  }, [status]);
+  const ClearCookieAndData = () => {
+    clearPaymentData();
+    navigate('/create-new-sheet');
+  };
 
   const getStatusContent = () => {
     switch (status) {
       case 'COMPLETED':
         return {
-          icon: <CheckCircle className="text-green-500 text-6xl mb-4" />,
+          icon: (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-500" />
+            </motion.div>
+          ),
           title: 'Payment Successful',
           message: 'Thank you! Your payment has been processed successfully.',
           color: 'text-green-500',
+          bgColor: 'bg-green-50',
+          borderColor: 'border-green-100',
         };
       case 'FAILED':
         return {
-          icon: <TimerIcon className="text-red-500 text-6xl mb-4" />,
+          icon: (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <XCircle className="w-16 h-16 sm:w-20 sm:h-20 text-red-500" />
+            </motion.div>
+          ),
           title: 'Payment Failed',
           message: 'Sorry, your payment could not be processed. Please try again.',
           color: 'text-red-500',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-100',
         };
       case 'error':
         return {
-          icon: <TimerIcon className="text-red-500 text-6xl mb-4" />,
+          icon: (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              <XCircle className="w-16 h-16 sm:w-20 sm:h-20 text-red-500" />
+            </motion.div>
+          ),
           title: 'Error',
           message: error || 'An error occurred while processing your payment.',
           color: 'text-red-500',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-100',
         };
       default:
         return {
-          icon: <SplineIcon className="text-blue-500 text-6xl mb-4 animate-spin" />,
+          icon: (
+            <motion.div
+              animate={{
+                rotate: 360,
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                rotate: { duration: 1.5, repeat: Infinity, ease: "linear" },
+                scale: { duration: 1.5, repeat: Infinity }
+              }}
+            >
+              <Loader className="w-16 h-16 sm:w-20 sm:h-20 text-blue-500" />
+            </motion.div>
+          ),
           title: 'Processing Payment',
           message: 'Please wait while we verify your payment...',
           color: 'text-blue-500',
+          bgColor: 'bg-blue-50',
+          borderColor: 'border-blue-100',
         };
     }
   };
 
   const content = getStatusContent();
 
-  const ClearCookieAndData = () => {
-    clearPaymentData();
-    navigate('/');
-  };
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-lg"
       >
-        {content.icon}
-        <h2 className={`text-2xl font-bold mb-2 ${content.color}`}>{content.title}</h2>
-        <p className="text-gray-600 mb-6">{content.message}</p>
-
-        {(status === 'COMPLETED' || status === 'FAILED' || status === 'error') && (
-          <button
-            onClick={ClearCookieAndData}
-            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors"
+        <motion.div
+          className={`bg-white rounded-2xl shadow-xl overflow-hidden ${content.bgColor} border ${content.borderColor}`}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        >
+          {/* Status Icon */}
+          <motion.div
+            className="flex justify-center pt-6 sm:pt-8"
           >
-            Back to Home
-          </button>
-        )}
+            {content.icon}
+          </motion.div>
 
-        {paymentDetails && status === 'COMPLETED' && (
-          <div className="mt-6 text-left bg-gray-50 p-4 rounded-md">
-            <h3 className="font-semibold mb-2">Payment Details:</h3>
-            <p className="text-sm text-gray-600">
-              Transaction ID: {paymentDetails.merchantTransactionId}
-            </p>
-            <p className="text-sm text-gray-600">Amount: ₹{paymentDetails.amount / 100}</p>
+          {/* Content */}
+          <div className="p-6 sm:p-8">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className={`text-xl sm:text-2xl font-bold text-center mb-2 ${content.color}`}
+            >
+              {content.title}
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-gray-600 text-center text-sm sm:text-base mb-6 sm:mb-8"
+            >
+              {content.message}
+            </motion.p>
+
+            {/* Payment Details */}
+            {paymentDetails && status === 'COMPLETED' && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                className="bg-white rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border border-green-100 shadow-sm"
+              >
+                <h3 className="font-semibold text-gray-800 mb-3 sm:mb-4">Payment Details</h3>
+                <div className="space-y-2 sm:space-y-3">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="flex justify-between items-center text-sm sm:text-base"
+                  >
+                    <span className="text-gray-600">Transaction ID:</span>
+                    <span className="font-medium text-gray-800">
+                      {paymentDetails.merchantTransactionId}
+                    </span>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.7 }}
+                    className="flex justify-between items-center text-sm sm:text-base"
+                  >
+                    <span className="text-gray-600">Amount:</span>
+                    <span className="font-medium text-gray-800">
+                      ₹{paymentDetails.amount / 100}
+                    </span>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Action Button */}
+            {(status === 'COMPLETED' || status === 'FAILED' || status === 'error') && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ scale: 1.02, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+                whileTap={{ scale: 0.98 }}
+                onClick={ClearCookieAndData}
+                className={`w-full py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-200 ${status === 'COMPLETED'
+                    ? 'bg-green-500 hover:bg-green-600 text-white'
+                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                  }`}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  {status === 'COMPLETED' ? (
+                    <>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.7 }}
+                      >
+                        Continue to Dashboard
+                      </motion.span>
+                    </>
+                  ) : (
+                    <>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ delay: 0.7 }}
+                      >
+                        Try Again
+                      </motion.span>
+                    </>
+                  )}
+                </span>
+              </motion.button>
+            )}
           </div>
-        )}
+        </motion.div>
       </motion.div>
     </div>
   );
