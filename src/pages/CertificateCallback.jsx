@@ -37,9 +37,7 @@ const CertificateCallback = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/api/user/verify_payment-for-certificate/${merchantOrderId}?serialNumber=${certificateData.serialNumber[0]}`
         );
-        console.log(response);
-        const { data } = response.data;
-        console.log(data);
+        const { data } = response;
         if (data.success === true) {
           setPaymentDetails(data);
           setStatus(data.status);
@@ -157,7 +155,7 @@ const CertificateCallback = () => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4 py-8 md:px-6 md:py-16">
       <motion.div
-        className="max-w-md mx-auto w-full bg-white rounded-lg shadow-lg overflow-hidden"
+        className="max-w-3xl mx-auto w-full bg-white rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
