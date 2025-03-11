@@ -33,7 +33,7 @@ const CertificateCallback = () => {
         if (!merchantOrderId) {
           throw new Error('Merchant Order ID is missing');
         }
-        console.log(certificateData.serialNumber[0]);
+        console.log(certificateData);
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/api/user/verify_payment-for-certificate/${merchantOrderId}?serialNumber=${certificateData.serialNumber[0]}`
         );
