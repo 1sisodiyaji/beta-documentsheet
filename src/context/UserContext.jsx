@@ -73,16 +73,29 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updateCertifcateDetails = (data) => {
+  const updateCertificateDetails = (data) => {
     console.log('Updating Certificate Data:', data);
     setCertificateData((prev) => {
+      // Extract the serial number if it's spread across numeric keys
+      let serialNum = '';
+      if (typeof data === 'object') {
+        // Combine the characters into a single serial number
+        for (let i = 0; i < Object.keys(data).length; i++) {
+          if (typeof data[i] === 'string') {
+            serialNum += data[i];
+          }
+        }
+      }
+
       const updatedData = {
         ...prev,
-        ...data,
-        serialNumber: Array.isArray(data.serialNumber)
-          ? [...prev.serialNumber, ...data.serialNumber]
-          : data.serialNumber || prev.serialNumber,
+        merchantOrderId: data.merchantOrderId || prev.merchantOrderId,
+        serialNumber: serialNum ?
+          [...(prev.serialNumber || []), serialNum] :
+          (Array.isArray(data.serialNumber) ? data.serialNumber : prev.serialNumber || [])
       };
+
+      console.log('Updated Certificate Data:', updatedData);
       saveCertificateToCookie(updatedData);
       return updatedData;
     });
@@ -119,7 +132,7 @@ export const UserProvider = ({ children }) => {
         updatePaymentData,
         clearPaymentData,
         certificateData,
-        updateCertifcateDetails,
+        updateCertificateDetails,
         clearCertificateData,
       }}
     >
