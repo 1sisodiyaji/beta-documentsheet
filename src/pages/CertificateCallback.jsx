@@ -120,7 +120,7 @@ const CertificateCallback = () => {
           </div>
         ),
         title: 'Downloading Certificate',
-        message: 'Your certificate will be ready in a moment...',
+        message: 'Please wait while your certificate is being prepared.',
         color: 'text-blue-500',
       };
     }
@@ -151,7 +151,7 @@ const CertificateCallback = () => {
         return {
           icon: <SplineIcon className="text-blue-500 w-16 h-16 animate-spin" />,
           title: 'Processing Payment',
-          message: 'Please wait while we verify your payment...',
+          message: 'Please wait while your certificate is being prepared. Kindly do not leave the page or turn off your screen',
           color: 'text-blue-500',
         };
     }

@@ -160,7 +160,7 @@ const SuccessPage = () => {
   useEffect(() => {
     if (!paymentData.sheetID) {
       console.log('[SuccessPage] No sheetID found, redirecting to home');
-      // navigate('/');
+      navigate('/');
       return;
     }
 
@@ -183,7 +183,7 @@ const SuccessPage = () => {
               <div className="flex flex-col items-center p-6 bg-white shadow-xl rounded-xl">
                 {/* Animated Spinner */}
                 <div className="relative flex items-center justify-center mb-6">
-                  <div className="w-16 h-16 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin"></div>
+                  <div className="w-16 h-16 border-4 border-t-green-500 border-gray-300 rounded-full animate-spin mb-2"></div>
                   <div className="absolute flex space-x-1 bottom-[-10px]">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse delay-200"></div>
@@ -192,13 +192,10 @@ const SuccessPage = () => {
                 </div>
 
                 {/* Countdown Timer */}
-                <h1 className="text-center text-xl font-semibold text-gray-900 animate-fade-in">
-                  Please wait for <span className="text-green-500 font-bold">{seconds}</span>{' '}
-                  seconds.
-                </h1>
-                <p className="text-sm text-gray-600 mt-2 text-center animate-fade-in">
-                  Do not close this browser or tab while the process completes.
-                </p>
+                <h1 className="text-center text-xl font-semibold text-gray-900 animate-fade-in"> Please wait for <span className="text-green-500 font-bold">{seconds}</span>{' '} seconds. </h1>
+                <h2 className="text-md text-gray-600 mt-2 text-center animate-fade-in">Please wait while your certificate is being prepared.</h2>
+                <p className="text-md text-gray-600 mt-2 text-center animate-fade-in"> Kindly do not leave the page or turn off your screen</p>
+                <h3 className="text-lg text-gray-800 mt-2 text-center animate-fade-in"> <strong>Note:</strong> To ensure the document's durability and quality, please use 100 GSM paper for printing.</h3>
               </div>
             </div>
           </>
