@@ -15,7 +15,7 @@ const ScanResultModal = ({ qrResult, closeModal }) => {
         </div>
 
         <h3 className="text-xl font-bold mb-4">Scanned Result:</h3>
-        <iframe src={qrResult} frameBorder="0" className="w-full h-96"></iframe>
+        <iframe src={qrResult} frameBorder="0" className="w-full md:h-96 h-full"></iframe>
       </div>
     </div>
   );
