@@ -96,6 +96,20 @@ const CreateNewSheet = () => {
       return;
     }
 
+    if(docData.Reason.length > 200) {
+      toast.error("Reason must be within 200 Charachter")
+    }
+    if(docData.Village.length > 200) {
+      toast.error("Village name must be within 30 chatachter")
+    }
+    if(docData.Post.length > 30) {
+      toast.error("Post lenght must be within 30 Charachter")
+    }
+    if(docData.NumberOfSheet > 5) {
+      toast.error("Max 5 Sheet can be printed .")
+    }
+
+    
     try {
       setLoading(true);
       console.log('[CreateNewSheet] Sending API request to create sheet');
@@ -212,6 +226,7 @@ const CreateNewSheet = () => {
                   value={docData.Reason}
                   onChange={handleInputChange}
                   id="Reason"
+                  maxLength={200}
                   placeholder="Enter Reason"
                   className="py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-green-500 ring-4 ring-green-100"
                 />
@@ -236,6 +251,7 @@ const CreateNewSheet = () => {
                   value={docData.Village}
                   onChange={handleInputChange}
                   id="Village"
+                  maxLength={30}
                   placeholder="Enter Your Village"
                   className="py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-green-500 ring-4 ring-green-100"
                 />
@@ -252,6 +268,7 @@ const CreateNewSheet = () => {
                   value={docData.Post}
                   onChange={handleInputChange}
                   id="Post"
+                  maxLength={30}
                   placeholder="Enter Post"
                   className="py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-green-500 ring-4 ring-green-100"
                 />
