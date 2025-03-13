@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Tag, Lock, User2Icon, IndianRupeeIcon } from 'lucide-react';
 import TimeConverter from '../utils/TimeConverter';
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import {toast} from 'react-hot-toast';
 import { useUserContext } from '../context/UserContext';
 
 const Certificate = () => {

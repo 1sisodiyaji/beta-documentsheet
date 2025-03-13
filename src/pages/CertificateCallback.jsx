@@ -44,6 +44,7 @@ const CertificateCallback = () => {
           setStatus(data.status);
 
           if (data.status === 'COMPLETED') {
+            clearInterval(checkInterval); 
             GenerateCertificate(certificateData.serialNumber[0]);
           }
         } else {
@@ -71,12 +72,13 @@ const CertificateCallback = () => {
     clearCertificateData();
   }
   const GenerateCertificate = async (serialNumber) => {
+    if (isDownloading) return; 
     try {
       setIsDownloading(true);
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/get-certificate/${serialNumber}`
+        `${import.meta.env.VITE_BASE_URL}/api/user/get-certificate/${serialNumber}`, { responseType: 'blob' }
       );
-      console.log(response);
+
       if (response.status === 200) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(fileBlob);
