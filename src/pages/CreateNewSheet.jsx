@@ -81,9 +81,6 @@ useEffect(()=>{
     ? StatesData.find((state) => state.state === docData.state)?.districts || []
     : [];
 
-  const generateRange = (start, end) =>
-    Array.from({ length: end - start + 1 }, (_, i) => start + i);
-
   const onHandleDocCreated = async () => {
     if (!validateFields()) {
       console.log('[CreateNewSheet] Form validation failed');
@@ -232,7 +229,7 @@ useEffect(()=>{
                   value={docData.Reason}
                   onChange={handleInputChange}
                   id="Reason"
-                  maxLength={200}
+                  maxLength={300}
                   placeholder="Enter Reason"
                   className="py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-green-500 ring-4 ring-green-100"
                 />
