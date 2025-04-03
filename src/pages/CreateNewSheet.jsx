@@ -45,23 +45,27 @@ const CreateNewSheet = () => {
   });
 
   const validateFields = () => {
-    console.log('[CreateNewSheet] Starting field validation:', docData);
-    const tempErrors = {};
-    let isValid = true;
-
-    Object.entries(docData).forEach(([key, value]) => {
-      if (!value) {
-        tempErrors[key] =
-          `${key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())} is required`;
-        isValid = false;
-        console.log(`[CreateNewSheet] Validation failed for ${key}`);
+    const tempErrors = {}
+    let isValid = true
+    const requiredFields = ['UserName', 'Reason', 'Village', 'NumberOfSheet']
+    
+    requiredFields.forEach((field) => {
+      if (!docData[field]) {
+        tempErrors[field] = `${field} is required`
+        toast.error(`${field} is required`)
+        setErrors(tempErrors)
+        isValid = false
       }
-    });
+    })
 
-    console.log('[CreateNewSheet] Validation complete:', { isValid, errors: tempErrors });
-    setErrors(tempErrors);
-    return isValid;
-  };
+    if (docData.NumberOfSheet > 5) {
+      tempErrors.NumberOfSheet = "Maximum 5 sheets can be printed"
+      isValid = false
+    }
+
+    setErrors(tempErrors)
+    return isValid
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -81,12 +85,9 @@ const CreateNewSheet = () => {
     ? StatesData.find((state) => state.state === docData.state)?.districts || []
     : [];
 
-  const onHandleDocCreated = async () => {
-    if (!validateFields()) {
-      console.log('[CreateNewSheet] Form validation failed');
-      toast.error('Please fill all the fields');
-      return;
-    }
+  const onHandleDocCreated = async (e) => {
+    e.preventDefault();
+    if (!validateFields())return;
 
     const today = new Date();
     const todayFormatted = today.toISOString().split('T')[0];
@@ -98,6 +99,15 @@ const CreateNewSheet = () => {
       });
       toast.error('Please do not select past dates.');
       return;
+    }
+
+    const maxDate = new Date(today);
+    maxDate.setDate(maxDate.getDate() + 31);
+    const maxDateFormatted = maxDate.toISOString().split('T')[0];
+
+    if (docData.Date >= maxDateFormatted) {
+      toast.error('Please select a date within the next 31 days.')
+      return
     }
 
     if (docData.Reason.length > 300) {
@@ -203,7 +213,7 @@ const CreateNewSheet = () => {
             >
               <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg">
                 <label className="mb-2 font-medium text-gray-700" htmlFor="UserName">
-                  Your Name
+                  Your Name <span className='text-red-500'>*</span>
                 </label>
                 <motion.input
                   whileFocus={{ scale: 1.02 }}
@@ -221,7 +231,7 @@ const CreateNewSheet = () => {
 
               <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg">
                 <label className="mb-2 font-medium text-gray-700" htmlFor="Reason">
-                  Reason
+                  Reason <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type="text"
@@ -246,7 +256,7 @@ const CreateNewSheet = () => {
             >
               <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg">
                 <label className="mb-2 font-medium text-gray-700" htmlFor="Village">
-                  Village
+                  Village <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type="text"
@@ -307,7 +317,6 @@ const CreateNewSheet = () => {
                 {errors.state && <p className="text-red-500 text-xs">{errors.state}</p>}
               </div>
 
-              {docData.state && (
                 <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg">
                   <label className="mb-2 font-medium text-gray-700" htmlFor="District">
                     Select District
@@ -328,7 +337,7 @@ const CreateNewSheet = () => {
                   </select>
                   {errors.District && <p className="text-red-500 text-xs">{errors.District}</p>}
                 </div>
-              )}
+              
 
               <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg">
                 <label className="mb-2 font-medium text-gray-700" htmlFor="Date">
@@ -338,7 +347,18 @@ const CreateNewSheet = () => {
                   type="date"
                   name="Date"
                   value={docData.Date}
-                  min={new Date().toISOString().split('T')[0]}
+                  min={(() => {
+                    const today = new Date()
+                    today.setMinutes(today.getMinutes() - today.getTimezoneOffset())
+                    return today.toISOString().split('T')[0]
+                  })()}
+                  max={(() => {
+                    const today = new Date()
+                    const maxDate = new Date()
+                    maxDate.setMonth(today.getMonth() + 1)
+                    maxDate.setMinutes(maxDate.getMinutes() - maxDate.getTimezoneOffset())
+                    return maxDate.toISOString().split('T')[0]
+                  })()}
                   onChange={handleInputChange}
                   id="Date"
                   className="py-3 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-green-500 ring-4 ring-green-100"
@@ -356,7 +376,7 @@ const CreateNewSheet = () => {
               {/* Number of Sheets */}
               <div className="flex flex-col p-4 border-2 border-gray-200 rounded-lg w-full ">
                 <label className="mb-2 font-medium text-gray-700" htmlFor="NumberOfSheet">
-                  Number of Sheets
+                  Number of Sheets <span className='text-red-500'>*</span>
                 </label>
                 <motion.select
                   whileFocus={{ scale: 1.02 }}
