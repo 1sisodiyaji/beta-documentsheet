@@ -1,12 +1,11 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { UserContext } from './userContext';
 import Cookies from 'js-cookie';
 import CryptoJS from 'crypto-js';
 
 const SECRET_KEY = 'documentsheet123@2024';
 const COOKIE_NAME = 'DocumentSheet_Payment_Data';
 const CERTIFICATE_COOKIE_NAME = 'DocumentSheet_Certificate_Data';
-
-const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [paymentData, setPaymentData] = useState({
@@ -64,9 +63,7 @@ export const UserProvider = ({ children }) => {
       const updatedData = {
         ...prev,
         ...data,
-        serialNumber: Array.isArray(data.serialNumber)
-          ? [...prev.serialNumber, ...data.serialNumber]
-          : data.serialNumber || prev.serialNumber,
+        serialNumber: Array.isArray(data.serialNumber) ? [...prev.serialNumber, ...data.serialNumber] : data.serialNumber || prev.serialNumber,
       };
       saveToCookie(updatedData); // Save updated data to cookie
       return updatedData;
@@ -135,12 +132,4 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-export const useUserContext = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error('useUserContext must be used within a UserProvider');
-  }
-  return context;
 };

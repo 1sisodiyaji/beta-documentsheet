@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Tag, Lock, User2Icon, IndianRupeeIcon } from 'lucide-react';
 import TimeConverter from '../utils/TimeConverter';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../context/useUserContext';
 
 const Certificate = () => {
   const { serialNumber } = useParams();
@@ -17,9 +17,7 @@ const Certificate = () => {
   useEffect(() => {
     const fetchCertificate = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/user/search-sheet/${serialNumber}`
-        );
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/search-sheet/${serialNumber}`);
         if (response.data.success) {
           setCertificateData(response.data.SheetDetails);
         } else {
@@ -39,13 +37,10 @@ const Certificate = () => {
   const handleDownloadCertificate = async (serialNum) => {
     try {
       const redirectUrl = `${window.location.origin}/certificate-callback`;
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/user/create-payment-for-certificate`,
-        {
-          serialNumber: serialNum,
-          redirectUrl,
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/user/create-payment-for-certificate`, {
+        serialNumber: serialNum,
+        redirectUrl,
+      });
 
       const data = response.data;
       console.log('[Payment] Payment API Response:', data);
@@ -118,19 +113,9 @@ const Certificate = () => {
         <div className="mt-6">
           <h2 className="text-lg font-semibold mb-4">Serial Numbers</h2>
           {certificateData.serialNumbers.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center p-3 bg-gray-100 rounded-md mb-2"
-            >
-              <span className="text-gray-700 font-medium md:text-lg text-xs">
-                {item.serialNumber}
-              </span>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleDownloadCertificate(item.serialNumber)}
-                className="flex items-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 md:text-lg text-xs"
-              >
+            <div key={index} className="flex justify-between items-center p-3 bg-gray-100 rounded-md mb-2">
+              <span className="text-gray-700 font-medium md:text-lg text-xs">{item.serialNumber}</span>
+              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleDownloadCertificate(item.serialNumber)} className="flex items-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 md:text-lg text-xs">
                 <Lock className="w-4 h-4" /> Download Certificate
               </motion.button>
             </div>

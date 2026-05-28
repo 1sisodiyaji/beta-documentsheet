@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../context/useUserContext';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
@@ -68,12 +68,9 @@ const SuccessPage = () => {
 
     try {
       setIsDownloading(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-Sheet/${sheetID}`,
-        {
-          responseType: 'blob',
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/genrate-Sheet/${sheetID}`, {
+        responseType: 'blob',
+      });
 
       if (response.status === 200) {
         const fileBlob = new Blob([response.data], { type: 'application/pdf' });
@@ -109,12 +106,9 @@ const SuccessPage = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/user/genrate-bill/${sheetID}`,
-        {
-          responseType: 'blob',
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/genrate-bill/${sheetID}`, {
+        responseType: 'blob',
+      });
 
       if (response.status === 200) {
         console.log('[SuccessPage] Creating bill download link');
@@ -192,9 +186,15 @@ const SuccessPage = () => {
                 </div>
 
                 {/* Countdown Timer */}
-                <h1 className="text-center text-xl font-semibold text-gray-900 animate-fade-in"> Please wait for <span className="text-green-500 font-bold">{seconds}</span>{' '} seconds. </h1>
+                <h1 className="text-center text-xl font-semibold text-gray-900 animate-fade-in">
+                  {' '}
+                  Please wait for <span className="text-green-500 font-bold">{seconds}</span> seconds.{' '}
+                </h1>
                 <p className="text-md text-gray-600 mt-2 text-center animate-fade-in"> Kindly do not leave the page or turn off your screen</p>
-                <h3 className="text-lg text-gray-800 mt-2 text-center animate-fade-in"> <strong>Note:</strong> To ensure the document&apos;s durability and quality, please use 100 GSM paper for printing.</h3>
+                <h3 className="text-lg text-gray-800 mt-2 text-center animate-fade-in">
+                  {' '}
+                  <strong>Note:</strong> To ensure the document&apos;s durability and quality, please use 100 GSM paper for printing.
+                </h3>
               </div>
             </div>
           </>
@@ -203,21 +203,13 @@ const SuccessPage = () => {
             {/* Get Invoice Button */}
             <div className="max-w-7xl mx-auto">
               <div className="flex justify-end pr-8">
-                <button
-                  onClick={() => DownloadBill(sheetID)}
-                  className={`px-6 py-2 rounded-md bg-green-200 text-green-800 font-medium hover:bg-green-300 transition ${
-                    loading ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                  disabled={loading}
-                >
+                <button onClick={() => DownloadBill(sheetID)} className={`px-6 py-2 rounded-md bg-green-200 text-green-800 font-medium hover:bg-green-300 transition ${loading ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={loading}>
                   {loading ? 'Downloading...' : 'Get Invoice'}
                 </button>
               </div>
 
               {/* Thank You Message */}
-              <h1 className="text-center text-lg md:text-xl font-medium text-gray-800 mt-8 mx-2">
-                Thank you for connecting with us. Please share your journey.
-              </h1>
+              <h1 className="text-center text-lg md:text-xl font-medium text-gray-800 mt-8 mx-2">Thank you for connecting with us. Please share your journey.</h1>
 
               <div className="flex justify-center items-center mt-8">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6 space-y-4">
@@ -226,9 +218,7 @@ const SuccessPage = () => {
                     {[1, 2, 3, 4, 5].map((star) => (
                       <i
                         key={star}
-                        className={`fi fi-sr-star cursor-pointer ${
-                          star <= rating ? 'text-yellow-400' : 'text-gray-300'
-                        } text-2xl`}
+                        className={`fi fi-sr-star cursor-pointer ${star <= rating ? 'text-yellow-400' : 'text-gray-300'} text-2xl`}
                         onClick={() => handleRatingClick(star)} // Set rating on click
                       ></i>
                     ))}
@@ -236,10 +226,7 @@ const SuccessPage = () => {
 
                   {/* Description */}
                   <div className="p-1">
-                    <label
-                      htmlFor="description"
-                      className="block text-sm font-medium text-gray-600"
-                    >
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-600">
                       Description
                     </label>
                     <textarea
@@ -255,9 +242,7 @@ const SuccessPage = () => {
                   {/* Submit Button */}
                   <div className="flex justify-end">
                     <button
-                      className={`px-6 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition ${
-                        isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                      }`}
+                      className={`px-6 py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                       onClick={handleSubmit}
                       disabled={isSubmitting} // Disable while submitting
                     >
@@ -269,31 +254,13 @@ const SuccessPage = () => {
 
               {/* Bottom Buttons */}
               <div className="flex justify-center mt-12 space-x-6">
-                <div
-                  onClick={() => ShiftToHome('/create-new-sheet')}
-                  className="flex flex-col justify-center items-center bg-yellow-100 p-6 rounded-xl shadow-md hover:bg-yellow-200 transition w-1/2 h-64 cursor-pointer"
-                >
-                  <img
-                    src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1733941760/image_19_gsh3ic.png"
-                    alt="new sheet"
-                    loading="lazy"
-                  />
-                  <h1 className="text-gray-800 font-medium md:text-3xl  overflow-hidden mt-4">
-                    Create New Sheet
-                  </h1>
+                <div onClick={() => ShiftToHome('/create-new-sheet')} className="flex flex-col justify-center items-center bg-yellow-100 p-6 rounded-xl shadow-md hover:bg-yellow-200 transition w-1/2 h-64 cursor-pointer">
+                  <img src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1733941760/image_19_gsh3ic.png" alt="new sheet" loading="lazy" />
+                  <h1 className="text-gray-800 font-medium md:text-3xl  overflow-hidden mt-4">Create New Sheet</h1>
                 </div>
-                <div
-                  onClick={() => ShiftToHome('/')}
-                  className="flex flex-col justify-center items-center bg-gray-100 p-6 rounded-xl shadow-md hover:bg-gray-200 transition w-1/2 h-64 cursor-pointer"
-                >
-                  <img
-                    src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1733940865/Simplification_1_hkqulx.png"
-                    alt="home"
-                    loading="lazy"
-                  />
-                  <h1 className="text-gray-800 font-medium md:text-3xl overflow-hidden mt-4">
-                    Back To Home
-                  </h1>
+                <div onClick={() => ShiftToHome('/')} className="flex flex-col justify-center items-center bg-gray-100 p-6 rounded-xl shadow-md hover:bg-gray-200 transition w-1/2 h-64 cursor-pointer">
+                  <img src="https://res.cloudinary.com/dlgyf2xzu/image/upload/v1733940865/Simplification_1_hkqulx.png" alt="home" loading="lazy" />
+                  <h1 className="text-gray-800 font-medium md:text-3xl overflow-hidden mt-4">Back To Home</h1>
                 </div>
               </div>
             </div>

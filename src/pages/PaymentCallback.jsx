@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { CheckCircle, SplineIcon, TimerIcon } from 'lucide-react';
-import { useUserContext } from '../context/UserContext';
+import { useUserContext } from '../context/useUserContext';
 
 const PaymentCallback = () => {
   const [status, setStatus] = useState('loading');
@@ -23,9 +23,7 @@ const PaymentCallback = () => {
           throw new Error('Merchant Order ID is missing');
         }
 
-        const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/user/verify_payment/${merchantOrderId}`
-        );
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/verify_payment/${merchantOrderId}`);
 
         const { data } = response;
 
@@ -65,7 +63,7 @@ const PaymentCallback = () => {
       console.log('Clearing interval on unmount.');
       clearInterval(checkInterval);
     };
-  }, [status]);
+  }, [status, merchantOrderId, navigate]);
 
   const getStatusContent = () => {
     switch (status) {
@@ -108,20 +106,13 @@ const PaymentCallback = () => {
   };
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-50">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center">
         {content.icon}
         <h2 className={`text-2xl font-bold mb-2 ${content.color}`}>{content.title}</h2>
         <p className="text-gray-600 mb-6">{content.message}</p>
 
         {(status === 'COMPLETED' || status === 'FAILED' || status === 'error') && (
-          <button
-            onClick={ClearCookieAndData}
-            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors"
-          >
+          <button onClick={ClearCookieAndData} className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors">
             Back to Home
           </button>
         )}
@@ -129,9 +120,7 @@ const PaymentCallback = () => {
         {paymentDetails && status === 'COMPLETED' && (
           <div className="mt-6 text-left bg-gray-50 p-4 rounded-md">
             <h3 className="font-semibold mb-2">Payment Details:</h3>
-            <p className="text-sm text-gray-600">
-              Transaction ID: {paymentDetails.merchantTransactionId}
-            </p>
+            <p className="text-sm text-gray-600">Transaction ID: {paymentDetails.merchantTransactionId}</p>
             <p className="text-sm text-gray-600">Amount: ₹{paymentDetails.amount / 100}</p>
           </div>
         )}
